@@ -1,0 +1,29 @@
+.user-image {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-top: -2px;
+}
+
+/* Logo */
+.logo-lg{
+    text-align: left;
+}
+.logo-mini img , .logo-lg img{
+    width:35px;
+    text-align: left;
+    margin-right:5px;
+}
+
+/*Navbar*/
+.navbar-brand {
+        border-right: 0px solid transparent !important;
+}
+.navbar .navbar-right>li>a {
+    border-left: 1px solid transparent !important;
+}
+ul.treeview-menu {
+    padding-left: 25px;
+}

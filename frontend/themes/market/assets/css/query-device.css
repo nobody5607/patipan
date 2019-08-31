@@ -1,0 +1,101 @@
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  .responsive-device{
+      /* background:blue; */
+      width: 310px;
+      
+  }
+  ul.megamenu.two-menu.cn-menu li a {
+    font-size: 14pt;
+}
+    
+    
+  }
+  
+  /* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+  
+  @media (min-width: 1025px) and (max-width: 1480px) {
+    .responsive-device{
+        /* background:blue; */
+        width: 310px
+    }
+    .typeheader-1 .header-top { 
+        min-height: 10px;
+        height: 25px;
+        /* line-height: 20px; */
+    }
+    .container-megamenu.horizontal ul.megamenu > li > a{
+        padding: 13px 0;
+    } 
+    .container-megamenu.horizontal ul.megamenu > li > a strong {
+        font-weight: 100;
+    }
+    ul.megamenu.pull-right li:hover, ul.megamenu.pull-right li a:hover, ul.megamenu.pull-right li a span strong:hover {
+        color: #FF9800;
+    }
+    ul.megamenu > li > a strong {
+        font-weight: 340;
+    }
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .responsive-device{
+        /* background:blue; */
+        width: 275px;
+        padding: 0;
+    }
+    .navbar-logo{
+        width: 80px;
+    }
+    .cn-search{
+        width: 280px;
+    }
+    .cn-cart{    width: 100px;}
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+     
+    
+  }
+  
+  /* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    .typeheader-1 .header-top {
+        height: 38px;
+        background: blue;
+    } 
+  }
+  
+  /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+     
+    
+  }
