@@ -110,26 +110,39 @@ class StudentController extends Controller
      */
     public function actionUpdate($id)
     {
-	if (Yii::$app->getRequest()->isAjax) {
-	    $model = $this->findModel($id);
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: DELETE, POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,x-token');
+        \Yii::$app->controller->enableCsrfValidation = false;
+        
+	$id = \Yii::$app->request->get('id','');
+        $mobile = \Yii::$app->request->get('mobile','');
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $post = \Yii::$app->request->post('Student');
             
-	    if ($model->load(Yii::$app->request->post())) {
-		$model->update_by = \common\modules\user\classes\CNUserFunc::getUserId();
-                $model->update_date = date('Y-m-d H:i:s');
-                $model->rstat = 1;
-		if ($model->save()) {
-		    return \cpn\chanpan\classes\CNMessage::getSuccess('Update successfully');
-		} else {
-		    return \cpn\chanpan\classes\CNMessage::getError('Can not update the data.');
-		}
-	    } else {
-		return $this->renderAjax('update', [
-		    'model' => $model,
-		]);
-	    }
-	} else {
-	    throw new NotFoundHttpException('Invalid request. Please do not repeat this request again.');
-	}
+            $model->update_by = \common\modules\user\classes\CNUserFunc::getUserId();
+            $model->update_date = date('Y-m-d H:i:s');
+            $model->rstat = 1;
+            if($post['image'] != ''){
+               $model->image = $post['image']['path'];
+            }
+            if ($model->save()) {
+                return \cpn\chanpan\classes\CNMessage::getSuccess('Update successfully');
+            } else {
+                return \cpn\chanpan\classes\CNMessage::getError('Can not update the data.');
+            }
+        }else{
+            if($mobile == '1'){
+                return $this->renderAjax('mobile', [
+                    'model' => $model,
+                ]);
+            }
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
+        
     }
 
     /**

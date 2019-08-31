@@ -128,6 +128,7 @@ return [
             'user/recovery/reset',
             'informations/index',
             'api/*',
+            'student/update'
         ]
     ],
     'params' => $params,

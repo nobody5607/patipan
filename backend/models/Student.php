@@ -39,7 +39,7 @@ class Student extends \yii\db\ActiveRecord
             [['id'], 'required'],
             [['number', 'sex', 'create_by', 'update_by', 'rstat'], 'integer'],
             [['address'], 'string'],
-            [['create_date', 'update_date','token','start_score','end_score'], 'safe'],
+            [['create_date', 'update_date','token','start_score','end_score','image'], 'safe'],
             [['name'], 'string', 'max' => 200],
             [['room', 'tel'], 'string', 'max' => 10],
             [['id'], 'string', 'max' => 20],
