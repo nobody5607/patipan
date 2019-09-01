@@ -128,7 +128,8 @@ return [
             'user/recovery/reset',
             'informations/index',
             'api/*',
-            'student/update'
+            'student/update',
+            'core/file-storage/avatar-upload'
         ]
     ],
     'params' => $params,
