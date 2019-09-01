@@ -86,7 +86,11 @@ class StudentController extends Controller
             $model->create_date = date('Y-m-d H:i:s');
             $model->token = \Yii::$app->security->generateRandomString(20);
             $model->rstat = 1;
-	    if ($model->load(Yii::$app->request->post())) { 
+	    if ($model->load(Yii::$app->request->post())) {
+                $post = \Yii::$app->request->post('Student');
+                if($post['image'] != ''){
+                    $model->image = \appxq\sdii\utils\SDUtility::array2String($post['image']);
+                 }
 		if ($model->save()) {
 		    return \cpn\chanpan\classes\CNMessage::getSuccess('Create successfully');
 		} else {
@@ -118,6 +122,7 @@ class StudentController extends Controller
 	$id = \Yii::$app->request->get('id','');
         $mobile = \Yii::$app->request->get('mobile','');
         $model = $this->findModel($id);
+        $message = "";
         if ($model->load(Yii::$app->request->post())) {
             $post = \Yii::$app->request->post('Student');
             
@@ -128,24 +133,29 @@ class StudentController extends Controller
                $model->image = \appxq\sdii\utils\SDUtility::array2String($post['image']);
             }
             if ($model->save()) {
-                return \cpn\chanpan\classes\CNMessage::getSuccess('Update successfully');
+                if($mobile == '1'){
+                    $message = "<div class='alert alert-success'><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a> แก้ไขข้อมูลนักเรียนสำเร็จ</div>"; 
+                }else{
+                    return \cpn\chanpan\classes\CNMessage::getSuccess('Update successfully');
+                }
             } else {
                 return \cpn\chanpan\classes\CNMessage::getError('Can not update the data.');
             }
-        }else{
+        } 
             if($model->image != ''){
                $model->image = \appxq\sdii\utils\SDUtility::string2Array($model->image);
             }
             if($mobile == '1'){
                 return $this->renderAjax('mobile', [
                     'model' => $model,
+                    'message'=>$message
                 ]);
             }
            
             return $this->renderAjax('update', [
                 'model' => $model,
             ]);
-        }
+         
         
     }
 

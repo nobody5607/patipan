@@ -6,7 +6,14 @@ use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml;
 ?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <div class="student-form">
+    <?php if($message != ''):?>
+        
+        <?= $message;?>
+    <?php endif; ?>
+    
     <?php $form = ActiveForm::begin(['id' => $model->formName()]); ?>
         <div class="">
             <div class=''><?= $form->field($model, 'id')->textInput() ?></div>
@@ -41,25 +48,3 @@ use appxq\sdii\helpers\SDHtml;
 
 </div>
 
-<?php
-\richardfan\widget\JSRegister::begin([
-    //'key' => 'bootstrap-modal',
-    'position' => \yii\web\View::POS_READY
-]);
-?>
-<script>
-// JS script
-    $('form#<?= $model->formName() ?>').on('beforeSubmit', function (e) {
-        var $form = $(this);
-        $.post($form.attr('action'),$form.serialize()).done(function (result) {
-            if (result.status == 'success') { 
-            } else {
-               console.log(result.status);
-            }
-        }).fail(function () { 
-            console.error('server error');
-        });
-        return false;
-    });
-</script>
-<?php \richardfan\widget\JSRegister::end(); ?>
