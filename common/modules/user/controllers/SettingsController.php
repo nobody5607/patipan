@@ -42,6 +42,7 @@ class SettingsController extends BaseSettingsController{
             
         }
         \backend\classest\KNLogFunc::addLog(1, "Preview Profile", "ดูข้อมูลส่วนตัว โดย: {$userId}:{$name} IP:".CNUtils::getCurrentIp());
+        
         return $this->render('profile', [
                     'model' => $model,
         ]);

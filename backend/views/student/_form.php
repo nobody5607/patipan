@@ -35,6 +35,16 @@ use appxq\sdii\helpers\SDHtml;
 	<?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
 	<?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?> 
     </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        <?php
+                echo $form->field($model, 'image')->widget(\trntv\filekit\widget\Upload::classname(), [
+                    'url' => ['/core/file-storage/avatar-upload'],
+                    'id'=>'upload'
+                ]);
+            ?>
+    </div>
+    </div>
     <div class="modal-footer">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">

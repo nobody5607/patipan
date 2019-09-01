@@ -125,7 +125,7 @@ class StudentController extends Controller
             $model->update_date = date('Y-m-d H:i:s');
             $model->rstat = 1;
             if($post['image'] != ''){
-               $model->image = $post['image']['path'];
+               $model->image = \appxq\sdii\utils\SDUtility::array2String($post['image']);
             }
             if ($model->save()) {
                 return \cpn\chanpan\classes\CNMessage::getSuccess('Update successfully');
@@ -133,11 +133,15 @@ class StudentController extends Controller
                 return \cpn\chanpan\classes\CNMessage::getError('Can not update the data.');
             }
         }else{
+            if($model->image != ''){
+               $model->image = \appxq\sdii\utils\SDUtility::string2Array($model->image);
+            }
             if($mobile == '1'){
                 return $this->renderAjax('mobile', [
                     'model' => $model,
                 ]);
             }
+           
             return $this->renderAjax('update', [
                 'model' => $model,
             ]);
