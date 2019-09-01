@@ -197,6 +197,7 @@ class ApiController extends \yii\web\Controller {
         }
         $output['totalScore']      = $totalScore; //รวมคะแนนที่ถูกต้อง
         $output['totalWrongScore'] = $totalWrongScore;//รวมคะแนนที่ผิด
+        $student->id = (string)$student->id;
         $student->rstat = 4;
         if($type == 1){
             $student->start_score = $output['totalScore'];
