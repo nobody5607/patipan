@@ -23,7 +23,10 @@ use appxq\sdii\helpers\SDHtml;
 
     <div class="modal-body">
 	<?= $form->field($model, 'test_id')->hiddenInput()->label(false) ?> 
-	<?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
+        <?php 
+                        $items = ['ก'=>'ก','ข'=>'ข','ค'=>'ค','ง'=>'ง'];
+                       echo $form->field($model, 'label')->inline()->radioList($items); 
+                    ?> 
 	<?php
             echo $form->field($model, 'value')->widget(\cpn\chanpan\widgets\CNFroalaEditorWidget::className(), [
                 'toolbar_size' => 'sm',

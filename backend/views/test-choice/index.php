@@ -50,12 +50,23 @@ $test_id = Yii::$app->request->get('test_id','');
 		'headerOptions' => ['style'=>'text-align: center;'],
 		'contentOptions' => ['style'=>'width:60px;text-align: center;'],
 	    ], 
-            'test_id',
-            'label',
-            'value:ntext',
-            'create_at',
-            // 'create_date',
-
+           
+            [
+                'contentOptions'=>['style'=>'width:100px;text-align:right;'],
+                'format'=>'raw',
+                'attribute'=>'label',
+                'value'=>function($model){
+                    return isset($model->label) ? $model->label : '';
+                }, 
+                'filter'=>['ก'=>'ก','ข'=>'ข','ค'=>'ค','ง'=>'ง']        
+            ], 
+            [
+                'format'=>'raw',
+                'attribute'=>'value',
+                'value'=>function($model){
+                    return isset($model->value) ? $model->value : '';
+                }, 
+            ], 
 	    [
 		'class' => 'appxq\sdii\widgets\ActionColumn',
 		'contentOptions' => ['style'=>'width:180px;text-align: center;'],

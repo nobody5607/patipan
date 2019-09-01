@@ -49,10 +49,31 @@ $this->params['breadcrumbs'][] = $this->title;
 		'headerOptions' => ['style'=>'text-align: center;'],
 		'contentOptions' => ['style'=>'width:60px;text-align: center;'],
 	    ],
-
-            'number',
-            'question',
-            'answer',
+            [
+                'contentOptions'=>['style'=>'width:100px;text-align:right;'],
+                'format'=>'raw',
+                'attribute'=>'number',
+                'value'=>function($model){
+                    return isset($model->number) ? $model->number : '';
+                }        
+            ],  
+            [
+                'format'=>'raw',
+                'attribute'=>'question',
+                'value'=>function($model){
+                    return isset($model->question)? $model->question:'';
+                },
+            ], 
+             
+            [
+                'contentOptions'=>['style'=>'width:100px;text-align:right;'],
+                'format'=>'raw',
+                'attribute'=>'answer',
+                'value'=>function($model){
+                    return isset($model->answer) ? $model->answer : '';
+                }, 
+                'filter'=>['ก'=>'ก','ข'=>'ข','ค'=>'ค','ง'=>'ง']        
+            ],             
             [
                 'format'=>'raw',
                 'attribute'=>'type',

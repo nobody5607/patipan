@@ -23,13 +23,34 @@ use appxq\sdii\helpers\SDHtml;
 
     <div class="modal-body">
         <div class="row">
-            <div class="col-md-2"><?= $form->field($model, 'number')->textInput() ?></div>
-            <div class="col-md-10"><?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?></div>
+            <div class="col-md-4"><?php
+                $items = [];
+                for($i=1; $i<=20; $i++){
+                    array_push($items, $i);
+                }
+                echo $form->field($model, 'number')->dropDownList($items,['prompt'=>'--เลือกลำดับหัวข้อ--']);
+            ?></div>
+            <div class="col-md-8">
+                <?= $form->field($model, 'type')->dropDownList(['1'=>'แบบทดสอบก่อนเรียน','2'=>'แบบทดสอบหลังเรียน'],['prompt'=>'--เลือกประเภท--']) ?>
+            </div>
             
         </div>
+        
          <div class="row">
-            <div class="col-md-6"><?= $form->field($model, 'answer')->textInput(['maxlength' => true]) ?></div>
-            <div class="col-md-6"><?= $form->field($model, 'type')->dropDownList(['1'=>'แบบทดสอบก่อนเรียน','2'=>'แบบทดสอบหลังเรียน'],['prompt'=>'--เลือกประเภท--']) ?></div> 
+            <div class="col-md-12">
+                    <?php 
+                        $items = ['ก'=>'ก','ข'=>'ข','ค'=>'ค','ง'=>'ง'];
+                       echo $form->field($model, 'answer')->inline()->radioList($items); 
+                    ?>
+            </div>
+             <div class="col-md-12">
+                <?php
+                    echo $form->field($model, 'question')->widget(\cpn\chanpan\widgets\CNFroalaEditorWidget::className(), [
+                        'toolbar_size' => 'lg',
+                        'options' => ['class' => 'question'],
+                    ])->label(false); 
+                ?>
+             </div> 
         </div>
 	
 	
