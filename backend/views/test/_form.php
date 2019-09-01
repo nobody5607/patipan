@@ -26,7 +26,8 @@ use appxq\sdii\helpers\SDHtml;
             <div class="col-md-4"><?php
                 $items = [];
                 for($i=1; $i<=20; $i++){
-                    array_push($items, $i);
+                    $items[$i] = $i;
+                    //array_push($items, $i);
                 }
                 echo $form->field($model, 'number')->dropDownList($items,['prompt'=>'--เลือกลำดับหัวข้อ--']);
             ?></div>
