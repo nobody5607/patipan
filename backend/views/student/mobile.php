@@ -15,23 +15,24 @@ use appxq\sdii\helpers\SDHtml;
     <?php endif; ?>
     
     <?php $form = ActiveForm::begin(['id' => $model->formName()]); ?>
-        <div class="">
-            <div class=''><?= $form->field($model, 'id')->textInput() ?></div>
-            <div class=''><?= $form->field($model, 'password')->passwordInput() ?></div>
-            <div class=''><?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
+        <div class="row">
+            <div class='col-xs-6'><?= $form->field($model, 'id')->textInput() ?></div>
+            <div class='col-xs-6'><?= $form->field($model, 'password')->passwordInput() ?></div>
+            
         </div>
-        <div class="">
-            <div class=''><?= $form->field($model, 'number')->textInput() ?></div>
-            <div class=''><?= $form->field($model, 'room')->textInput(['maxlength' => true]) ?></div>
-            <div class=''>
-                <?php $item = ['1' => 'ชาย', '2' => 'หญิง']; ?>
-                <?= $form->field($model, 'sex')->dropDownList($item, ['prompt' => '--เลือกเพศ--']) ?>
-            </div>
+        <div class="row">
+            <div class='col-xs-8'><?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
+            <div class='col-xs-4'><?= $form->field($model, 'number')->textInput() ?></div>
         </div>
-        <div class="">
+        <div class="row">
+            <div class='col-xs-6'><?= $form->field($model, 'room')->textInput(['maxlength' => true]) ?></div>
+            <div class='col-xs-6'> <?php $item = ['1' => 'ชาย', '2' => 'หญิง']; ?>
+                <?= $form->field($model, 'sex')->dropDownList($item, ['prompt' => '--เลือกเพศ--']) ?></div>
+        </div>
+        <div class=""> 
             <div class="">
                 <?= $form->field($model, 'address')->textarea(['rows' => 3]) ?>
-            <?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?> 
+                <?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?> 
             <?php
                 echo $form->field($model, 'image')->widget(\trntv\filekit\widget\Upload::classname(), [
                     'url' => ['/core/file-storage/avatar-upload']
