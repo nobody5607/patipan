@@ -17,6 +17,7 @@ class Teacher extends Model{
         return[
             [['email','username','password','confirmPassword','fname','lname','tel'],'required'],
             ['confirmPassword', 'compare', 'compareAttribute'=>'password', 'message'=>"รหัสผ่านไม่ตรงกัน" ],
+            ['password', 'string', 'min' => 6, 'max' => 72]
         ];
     }
     public function attributeLabels()
