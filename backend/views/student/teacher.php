@@ -7,18 +7,13 @@ use appxq\sdii\helpers\SDHtml;
 $this->title = Yii::t('user', 'เพิ่มครูผู้สอนคอมพิวเตอร์');  
 ?>
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title"><i class="fa fa-user"></i> <?= Html::encode($this->title); ?></h4>
-</div>
-<div class="modal-body">
-    <?php $form = ActiveForm::begin([
+ <?php $form = ActiveForm::begin([
 	'id'=>$model->formName(),
     ]); ?>
      <?= $form->field($model, 'email')->textInput()?>
     <?= $form->field($model, 'username')->textInput()?>
-    <?= $form->field($model, 'password')->passwordInput()?>
-    <?= $form->field($model, 'confirmPassword')->passwordInput()?>
+    <?= $form->field($model, 'password')->textInput()?>
+    <?= $form->field($model, 'confirmPassword')->textInput()?>
     <div class="row">
         <div class="col-md-6"><?= $form->field($model, 'fname')->textInput()?></div>
         <div class="col-md-6"><?= $form->field($model, 'lname')->textInput()?></div>
@@ -28,8 +23,7 @@ $this->title = Yii::t('user', 'เพิ่มครูผู้สอนคอ�
     <div class="form-group">
         <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
     </div>
-</div>
-<?php ActiveForm::end();?>
+<?php ActiveForm::end(); ?>
 
 <?php  \richardfan\widget\JSRegister::begin([
     //'key' => 'bootstrap-modal',
@@ -38,6 +32,7 @@ $this->title = Yii::t('user', 'เพิ่มครูผู้สอนคอ�
 <script>
 // JS script
 $('form#<?= $model->formName()?>').on('beforeSubmit', function(e) {
+     
     var $form = $(this);
     $.post(
         $form.attr('action'), //serialize Yii2 form

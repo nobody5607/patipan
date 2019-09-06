@@ -1,0 +1,35 @@
+<?php
+namespace common\modules\user\models;
+use Yii;
+use yii\base\Model;
+class Teacher extends Model{
+    public $email;
+    public $username;
+    public $password;
+    public $confirmPassword;
+    public $fname;
+    public $lname;
+    public $tel;
+    
+    
+    public function rules()
+    {
+        return[
+            [['email','username','password','confirmPassword','fname','lname','tel'],'required'],
+            ['confirmPassword', 'compare', 'compareAttribute'=>'password', 'message'=>"รหัสผ่านไม่ตรงกัน" ],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'email'    => Yii::t('user', 'Email'),
+            'username' => Yii::t('user', 'ชื่อผู้ใช้งาน'),
+            'password' => Yii::t('user', 'รหัสผ่าน'),
+            'confirmPassword' => Yii::t('user', 'ยืนยันรหัสผ่าน'),
+            'fname' => Yii::t('user', 'ชื่อ'),
+            'lname' => Yii::t('user', 'นามสกุล'),
+            'tel' => Yii::t('user', 'เบอร์โทรศัพท์'),
+            
+        ];
+    }
+}

@@ -29,6 +29,42 @@ class AdminController extends BaseAdminController{
             'searchModel'  => $searchModel,
         ]);
     }
+    public function actionCreate()
+    {
+        $model = new \common\modules\user\models\Teacher();
+        if ($model->load(\Yii::$app->request->post())) {
+            $data = \Yii::$app->request->post('Teacher'); 
+            $user = new User();  
+            $name = "{$data['fname']} {$data['lname']}";
+            $user->id = time();
+            $user->username = $data['username']; 
+            $user->password = Yii::$app->getSecurity()->generatePasswordHash($data['password']);
+            $user->email = $data['email'];
+            $user->auth_key = \Yii::$app->security->generateRandomString();
+            $user->confirmed_at = time(); 
+            try{
+                $user->save();
+                $columns=[
+                     'user_id'=>$user->id,
+                     'name'=>$name,
+                     'public_email'=>$user->email,
+                     'firstname'=>$data['fname'],
+                     'lastname'=>$data['lname'],
+                     'tel' => $data['tel']
+                 ];
+                \Yii::$app->db->createCommand()->delete('profile', 'user_id=:id',[':id'=>$user->id])->execute();
+                \Yii::$app->db->createCommand()->insert('profile', $columns)->execute();
+                
+            } catch (Exception $ex) {
+
+            }
+            return \cpn\chanpan\classes\CNMessage::getSuccess("เพิ่มครูสำเร็จ");
+        }
+
+        return $this->renderAjax('create', [
+            'model' => $model,
+        ]);
+    }
     public function actionUpdateProfile($id)
     {
         

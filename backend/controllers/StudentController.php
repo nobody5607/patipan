@@ -204,6 +204,22 @@ class StudentController extends Controller
      * @return Student the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    
+    public function actionTeacher()
+    {
+        $model = new \common\modules\user\models\Teacher();
+        if ($model->load(\Yii::$app->request->post())) {
+            $data = \Yii::$app->request->post();
+            $user = new User();
+            $profile = new Profile(); 
+        }
+
+        return $this->renderAjax('Teacher', [
+            'model' => $model,
+        ]);
+    }
+    
+    
     protected function findModel($id)
     {
         if (($model = Student::findOne($id)) !== null) {

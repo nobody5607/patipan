@@ -8,7 +8,7 @@ use appxq\sdii\widgets\ModalForm;
 use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml;
 
-$this->title = Yii::t('appmenu', 'ผู้ใช้');
+$this->title = Yii::t('appmenu', 'จัดการครูผู้สอนคอมพิวเตอร์');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="box-body">
+        <div class="text-right">
+            <button class="btn btn-success" id="btnCreate">ครูผู้สอนคอมพิวเตอร์</button>
+        </div>
 <?php Pjax::begin(['id' => 'user-grid-pjax']); ?>
         <div>
         <?=
@@ -159,6 +162,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
         ?>
 <script>
+    $("#btnCreate").on('click', function(){
+        const url = "<?= Url::to(['/user/admin/create'])?>";
+        modalUser(url);
+       return false;
+    });
     //btnPreviewGraph
     $('.btnPreviewGraph').on('click', function () {
         modalUser($(this).attr('data-url'));
