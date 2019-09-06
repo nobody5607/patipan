@@ -49,7 +49,7 @@ class Test extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'number' => Yii::t('app', 'ลำดับ'),
             'question' => Yii::t('app', 'คำถาม'),
-            'answer' => Yii::t('app', 'คำตอบที่ถูกต้อง ตัวอย่างเช่น ก'),
+            'answer' => Yii::t('app', 'เฉลย'),
             'create_by' => Yii::t('app', 'สร้างโดย'),
             'create_date' => Yii::t('app', 'สร้างเมื่อ'),
             'update_by' => Yii::t('app', 'แก้ไขโดย'),
