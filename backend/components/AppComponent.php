@@ -58,15 +58,15 @@ class AppComponent extends Component {
                     //['label' => \Yii::t('appmenu','About'), 'icon' => 'user', 'url' => ['/site/about']],
                     //['label' => \Yii::t('appmenu','Contact'), 'icon' => 'phone-square', 'url' => ['/site/contact']],
                     //['label' => \Yii::t('appmenu','Informations'), 'icon' => 'microphone', 'url' => ['/informations/index']],
-                    ['label' => \Yii::t('appmenu','บทเรียน'), 'icon' => 'book', 'url' => ['/lessons'], 'visible' => !Yii::$app->user->isGuest],
-                    ['label' => \Yii::t('appmenu','นักเรียน'), 'icon' => 'user', 'url' => ['/student'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => \Yii::t('appmenu','จัดการบทเรียน'), 'icon' => 'book', 'url' => ['/lessons'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => \Yii::t('appmenu','จัดการนักเรียน'), 'icon' => 'user', 'url' => ['/student'], 'visible' => !Yii::$app->user->isGuest],
                     [
-                        'label' => Yii::t('appmenu','ครูผู้สอนคอมพิวเตอร์'), 
+                        'label' => Yii::t('appmenu','จัดการครูผู้สอนคอมพิวเตอร์'), 
                         'icon' => 'users', 'url' => ['/user/admin/index'],
                         'visible' => \Yii::$app->user->can('admin')
                     ],
                     [
-                        'label' => Yii::t('appmenu', 'แบบฝึกหัดก่อน/หลังเรียน'), 'icon' => 'circle-o', 'url' => ['/test'], 'active' => '',
+                        'label' => Yii::t('appmenu', 'จัดการแบบฝึกหัดก่อน/หลังเรียน'), 'icon' => 'circle-o', 'url' => ['/test'], 'active' => '',
                         'visible' => !Yii::$app->user->isGuest,
                         'icon' => 'file-o',
                         

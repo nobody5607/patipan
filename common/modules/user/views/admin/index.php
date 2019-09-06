@@ -20,9 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <i class="fa fa-user"></i> <?= Html::encode($this->title); ?>
                 </div>
             </div>
-            <div class="col-md-2 text-right">
-                <buttn data-url="<?= Url::to(['/user/admin/graph'])?>" class="btn btn-warning btnPreviewGraph"><i class="fa fa-pie-chart" aria-hidden="true"></i> <?= Yii::t('appmenu','Preview Graph')?></buttn>
-            </div>
+            
         </div>
     </div>
     <div class="box-body">
