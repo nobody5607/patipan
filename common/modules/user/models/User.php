@@ -36,7 +36,7 @@ class User extends BaseUser{
                 ]);
                 $token->link('user', $this); 
             } else {
-                \Yii::$app->user->login($this);
+                //\Yii::$app->user->login($this);
             }
             if ($this->module->enableGeneratingPassword) {
                 $this->mailer->sendWelcomeMessage($this);

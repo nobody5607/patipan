@@ -1,5 +1,6 @@
 <?php
 namespace common\modules\user\controllers;
+use dektrium\user\filters\AccessRule;
 use appxq\sdii\utils\VarDumper;
 use cpn\chanpan\utils\CNUtils;
 use dektrium\user\controllers\AdminController as BaseAdminController;
@@ -9,9 +10,43 @@ use common\modules\user\models\Profile;
 use common\modules\user\models\User;
 use yii\web\NotFoundHttpException;
 use Yii;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\helpers\Html;
 
 class AdminController extends BaseAdminController{
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete'          => ['post'],
+                    'confirm'         => ['post'],
+                    'resend-password' => ['post'],
+                    'block'           => ['post'],
+                    'switch'          => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['switch'],
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'roles' => ['admin','teacher'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public function actionIndex()
     {  
        
@@ -38,10 +73,14 @@ class AdminController extends BaseAdminController{
             $name = "{$data['fname']} {$data['lname']}";
             $user->id = time();
             $user->username = $data['username']; 
-            $user->password = Yii::$app->getSecurity()->generatePasswordHash($data['password']);
             $user->email = $data['email'];
-            $user->auth_key = \Yii::$app->security->generateRandomString();
             $user->confirmed_at = time(); 
+            
+            $user->password = $data['password'];  //\Yii::$app->security->generatePasswordHash($data['password']);//Yii::$app->getSecurity()->generatePasswordHash($data['password']);
+            $user->register();
+            
+            // $user->auth_key = \Yii::$app->security->generateRandomString();
+            
             try{
                 $user->save();
                 $columns=[

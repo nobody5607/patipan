@@ -97,6 +97,7 @@ return [
             'class' => 'dektrium\user\Module',
             'enableConfirmation' => FALSE,
             'enableUnconfirmedLogin' => true,
+//            'enableAutoLogin' => false,
             'confirmWithin' => 21600,
             'cost' => 12,
             'admins' => ['admin'],//admin
@@ -129,7 +130,7 @@ return [
             'informations/index',
             'api/*',
             'student/update',
-            'core/file-storage/avatar-upload'
+            'core/file-storage/avatar-upload', 
         ]
     ],
     'params' => $params,
