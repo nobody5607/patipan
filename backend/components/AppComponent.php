@@ -94,7 +94,7 @@ class AppComponent extends Component {
                             'items' => [
                                 //options
                                 ['label' => Yii::t('appmenu','Setting Config'),        'icon' => 'circle-o', 'url' => ['/options'],],
-                                ['label' => Yii::t('appmenu','System Log'),     'icon' => 'circle-o', 'url' => ['/systemlog'],], 
+//                                ['label' => Yii::t('appmenu','System Log'),     'icon' => 'circle-o', 'url' => ['/systemlog'],], 
                                 ['label' => Yii::t('appmenu','Skin'),           'icon' => 'circle-o', 'url' => ['/skin'],],
                                 //['label' => Yii::t('appmenu','Sql Update'),     'icon' => 'circle-o', 'url' => ['/dbupdate'],], 
                                 //['label' => Yii::t('appmenu','Gii'),            'icon' => 'circle-o', 'url' => ['/gii'],],
