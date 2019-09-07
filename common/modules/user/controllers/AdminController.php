@@ -75,6 +75,7 @@ class AdminController extends BaseAdminController{
             $user->username = $data['username']; 
             $user->email = $data['email'];
             $user->confirmed_at = time(); 
+            $user->created_at = time(); 
             $checkEmail = User::find()->where('email=:email',[':email'=>$data['email']])->one();
             if($checkEmail){
                 return \cpn\chanpan\classes\CNMessage::getError("Email {$data['email']} ถูกใช้แล้ว");
