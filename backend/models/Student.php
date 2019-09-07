@@ -41,9 +41,10 @@ class Student extends \yii\db\ActiveRecord
             [['address'], 'string'],
             [['create_date', 'update_date','token','start_score','end_score','image','address'], 'safe'],
             [['name'], 'string', 'max' => 200],
-            [['room', 'tel'], 'string', 'max' => 10],
+            [['room'], 'string', 'max' => 10],
             [['id'], 'string', 'max' => 20],
             [['id'], 'unique'],
+            ['tel', 'string', 'min' => 10, 'max' => 10,'message'=>'เบอร์โทรศัพทต้องมี 10 ตัว']
         ];
     }
 

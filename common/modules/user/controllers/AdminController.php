@@ -75,6 +75,14 @@ class AdminController extends BaseAdminController{
             $user->username = $data['username']; 
             $user->email = $data['email'];
             $user->confirmed_at = time(); 
+            $checkEmail = User::find()->where('email=:email',[':email'=>$data['email']])->one();
+            if($checkEmail){
+                return \cpn\chanpan\classes\CNMessage::getError("Email {$data['email']} ถูกใช้แล้ว");
+            }
+            $checkUsername = User::find()->where('username=:username',[':username'=>$data['username']])->one();
+            if($checkUsername){
+                return \cpn\chanpan\classes\CNMessage::getError("Username {$data['username']} ถูกใช้แล้ว");
+            }
             
             $user->password = $data['password'];  //\Yii::$app->security->generatePasswordHash($data['password']);//Yii::$app->getSecurity()->generatePasswordHash($data['password']);
             $user->register();
