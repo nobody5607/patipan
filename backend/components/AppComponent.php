@@ -91,7 +91,7 @@ class AppComponent extends Component {
                             'label' => Yii::t('appmenu', 'Tools'),
                             'icon' => 'wrench',
                             'url' => '#',
-                            'items' => [
+                            'items' => [  
                                 //options
                                 ['label' => Yii::t('appmenu','Setting Config'),        'icon' => 'circle-o', 'url' => ['/options'],],
 //                                ['label' => Yii::t('appmenu','System Log'),     'icon' => 'circle-o', 'url' => ['/systemlog'],], 
