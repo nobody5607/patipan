@@ -32,7 +32,6 @@ use appxq\sdii\helpers\SDHtml;
                 <?= $form->field($model, 'sex')->dropDownList($item,['prompt'=>'--เลือกเพศ--']) ?>
         </div>
     </div>
-	<?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
 	<?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?> 
     </div>
     <div class="row">
