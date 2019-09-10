@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ///admin/assignment/view?id=1
                     'buttons' => [
                         'assign' => function($url, $model) {
-                            return Html::a('<span class="fa fa-shield"></span> ' . Yii::t('chanpan', 'Assign'), yii\helpers\Url::to(['/admin/assignment/view', 'id' => $model->id]), [
+                            return Html::a('<span class="fa fa-shield"></span> ' . Yii::t('chanpan', 'มอบหมาย'), yii\helpers\Url::to(['/admin/assignment/view', 'id' => $model->id]), [
                                         'title' => Yii::t('user', 'Assign'),
                                         'class' => 'btn btn-success btn-xs',
                                         'data-action' => 'assign',
@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                         },
                         'update' => function($url, $model) {
-                            return Html::a('<span class="fa fa-pencil"></span> ' . Yii::t('chanpan', 'Edit'), yii\helpers\Url::to(['/user/admin/update-profile/', 'id' => $model->id]), [
+                            return Html::a('<span class="fa fa-pencil"></span> ' . Yii::t('chanpan', 'แก้ไข'), yii\helpers\Url::to(['/user/admin/update-profile/', 'id' => $model->id]), [
                                         'title' => Yii::t('user', 'Edit'),
                                         'class' => 'btn btn-primary btn-xs',
                                         'data-action' => 'update',
