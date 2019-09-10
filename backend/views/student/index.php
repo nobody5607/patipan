@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     },
                     'update'=>function($url, $model){
-                        return Html::a('<span class="fa fa-edit"></span> '.Yii::t('app', 'Edit'), 
+                        return Html::a('<span class="fa fa-edit"></span> '.Yii::t('app', 'แก้ไข'), 
                                     yii\helpers\Url::to(['student/update/'.$model->id]), [
                                     'title' => Yii::t('app', 'Edit'),
                                     'class' => 'btn btn-primary btn-xs',
