@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				
 			}
 		],
-		'address:ntext',
+		
 		'tel',
 		[
 			'attribute'=>'create_by',
