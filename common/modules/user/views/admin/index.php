@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="box-body">
         <div class="text-right">
-            <button class="btn btn-success" id="btnCreate">ครูผู้สอนคอมพิวเตอร์</button>
+            <button class="btn btn-success" id="btnCreate">เพิ่มครูผู้สอนคอมพิวเตอร์</button>
         </div>
 <?php Pjax::begin(['id' => 'user-grid-pjax']); ?>
         <div>
