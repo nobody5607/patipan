@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="box-body">
         <div class="text-right">
-            <button class="btn btn-success" id="btnCreate">เพิ่มครูผู้สอนคอมพิวเตอร์</button>
+            <button class="btn btn-primary" id="btnCreate">เพิ่มครูผู้สอนคอมพิวเตอร์</button>
         </div>
 <?php Pjax::begin(['id' => 'user-grid-pjax']); ?>
         <div>
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'delete' => function ($url, $model) {
                             if ($model->id != \Yii::$app->user->getId()) {
-                                return Html::a('<span class="fa fa-trash"></span> ' . Yii::t('chanpan', 'Delete'), yii\helpers\Url::to(['/user/admin/delete/', 'id' => $model->id]), [
+                                return Html::a('<span class="fa fa-trash"></span> ' . Yii::t('chanpan', 'ลบข้อมูล'), yii\helpers\Url::to(['/user/admin/delete/', 'id' => $model->id]), [
                                             'title' => Yii::t('chanpan', 'Delete'),
                                             'class' => 'btn btn-danger btn-xs',
                                             'data-confirm' => Yii::t('user', 'Are you sure you want to delete this item?'),
