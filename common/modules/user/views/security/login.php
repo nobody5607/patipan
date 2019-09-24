@@ -55,8 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php else: ?>
 
-                    <?= $form->field($model, 'login',$fieldOptions1);
-                    ?>
+                    <?= $form->field($model, 'login',$fieldOptions1);?>
 
                 <?php endif ?>
 
@@ -72,13 +71,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ->passwordInput()
                         ->label(
                             Yii::t('user', 'Password')
-                            . ($module->enablePasswordRecovery ?
-                                ' (' . Html::a(
-                                    Yii::t('user', 'Forgot password?'),
-                                    ['/user/recovery/request'],
-                                    ['tabindex' => '5']
-                                )
-                                . ')' : '')
                         ) ?>
                 <?php endif ?>
                  <?= $form->field($model, 'rememberMe')->checkbox(['tabindex' => '3']) ?>
@@ -86,25 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Yii::t('user', 'Sign in'),
                     ['class' => 'btn btn-primary btn-block btn-lg', 'tabindex' => '4']
                 ) ?>
-               
-
-               
-
                 <?php ActiveForm::end(); ?>
-                
-                
-                <!-- /.social-auth-links -->
-                <?php if ($module->enableConfirmation): ?>
-                    <p class="text-left">
-                        <?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
-                    </p>
-                <?php endif ?>
-                <?php if ($module->enableRegistration): ?>
-                    <p class="text-left">
-                        <?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
-                    </p>
-                <?php endif ?>
-                
             </div>
             
             

@@ -10,6 +10,9 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
+\cpn\chanpan\assets\bootbox\BootBoxAsset::register($this);
+\cpn\chanpan\assets\notify\NotifyAsset::register($this);
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -41,7 +44,19 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
+        $menuItems[] = [
+                        'label' => 'จัดการผู้ใช้', 
+                        'icon' => 'users', 'url' => ['/user/admin/index'],
+                        'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+                    ];
+        $menuItems[] = ['label' => 'จัดการบทเรียน', 'icon' => 'book', 'url' => ['/lessons/index'], 'visible' => !Yii::$app->user->isGuest];
+        $menuItems[] = [
+                        'label' => 'จัดการเกมส์', 
+                        'icon' => 'users', 'url' => ['/game/index'],
+                        'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+                    ];
+        
+        $menuItems[] = '<li style="padding-top:10px;">'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -57,7 +72,8 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">          
+    <div class="container">
+        <br/><br/><br/>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
@@ -65,9 +81,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p> 
     </div>
 </footer>
 

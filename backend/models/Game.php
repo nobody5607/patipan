@@ -16,14 +16,14 @@ use Yii;
  * @property int $update_by แก้ไขโดย
  * @property string $update_date แก้ไขเมื่อ
  */
-class Test extends \yii\db\ActiveRecord
+class Game extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'test';
+        return 'game';
     }
 
     /**
@@ -32,7 +32,8 @@ class Test extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number','question','answer','type'], 'required'],
+            [['number','question','type'], 'required'],
+            [['answer'], 'required','message'=>'เฉลยต้องไม่ว่างเปล่า'],
             [['number', 'create_by', 'update_by'], 'integer'],
             [['create_date', 'update_date','type'], 'safe'],
             [['question'], 'string', 'max' => 255],
@@ -48,13 +49,13 @@ class Test extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'number' => Yii::t('app', 'ลำดับ'),
-            'question' => Yii::t('app', 'คำถาม'),
+            'question' => Yii::t('app', 'ชื่อเกมส์'),
             'answer' => Yii::t('app', 'เฉลย'),
             'create_by' => Yii::t('app', 'สร้างโดย'),
             'create_date' => Yii::t('app', 'สร้างเมื่อ'),
             'update_by' => Yii::t('app', 'แก้ไขโดย'),
             'update_date' => Yii::t('app', 'แก้ไขเมื่อ'),
-            'type'=>'ประเภทก่อนหรือหลังเรียน'
+            'type'=>'ประเภทเกมส์'
         ];
     }
 }

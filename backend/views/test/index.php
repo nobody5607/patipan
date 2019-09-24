@@ -12,13 +12,13 @@ use appxq\sdii\helpers\SDHtml;
 /* @var $searchModel backend\models\search\Test */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'จัดการแบบทดสอบก่อนเรียน/หรือหลังเรียน');
+$this->title = 'จัดการเกมส์';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="box box-primary">
     <div class="box-header">
-         <i class="fa fa-file-o"></i> <?=  Html::encode($this->title) ?> 
+         <i class="fa fa-gamepad"></i> <?=  Html::encode($this->title) ?> 
          <div class="pull-right">
              <?= Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['test/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-test']). ' ' .
 		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['test/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-test', 'disabled'=>false]) 

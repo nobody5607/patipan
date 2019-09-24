@@ -27,7 +27,6 @@ class SecurityController extends BaseSecurityController {
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->login()) {
             $userId = \common\modules\user\classes\CNUserFunc::getUserId();
             $name   = \common\modules\user\classes\CNUserFunc::getFullName();
-            \backend\classest\KNLogFunc::addLog(1, "Login", "Login โดย: {$userId}:{$name} IP: ".CNUtils::getCurrentIp());
             
             $this->trigger(self::EVENT_AFTER_LOGIN, $event);
             return $this->goBack();

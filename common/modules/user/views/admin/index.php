@@ -8,7 +8,7 @@ use appxq\sdii\widgets\ModalForm;
 use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml;
 
-$this->title = Yii::t('appmenu', 'จัดการครูผู้สอนคอมพิวเตอร์');
+$this->title = 'จัดการผู้ใช้';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="box-body">
         <div class="text-right">
-            <button class="btn btn-primary" id="btnCreate">เพิ่มครูผู้สอนคอมพิวเตอร์</button>
+            <button class="btn btn-success" id="btnCreate">เพิ่มผู้ใช้</button>
         </div>
 <?php Pjax::begin(['id' => 'user-grid-pjax']); ?>
         <div>

@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Test as TestModel;
+use backend\models\Game as GameModel;
 
 /**
- * Test represents the model behind the search form about `backend\models\Test`.
+ * Game represents the model behind the search form about `backend\models\Game`.
  */
-class Test extends TestModel
+class Game extends GameModel
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class Test extends TestModel
     public function rules()
     {
         return [
-            [['id', 'number', 'create_by', 'update_by'], 'integer'],
-            [['question', 'answer', 'create_date', 'update_date','type'], 'safe'],
+            [['id', 'number', 'create_by', 'update_by', 'type'], 'integer'],
+            [['question', 'answer', 'create_date', 'update_date'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class Test extends TestModel
      */
     public function search($params)
     {
-        $query = TestModel::find();
+        $query = GameModel::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

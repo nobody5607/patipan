@@ -130,7 +130,8 @@ return [
             'informations/index',
             'api/*',
             'student/update',
-            'core/file-storage/avatar-upload', 
+            'core/file-storage/avatar-upload',
+            'game/*'
         ]
     ],
     'params' => $params,

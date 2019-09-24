@@ -18,30 +18,29 @@ use appxq\sdii\helpers\SDHtml;
 
     <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="itemModalLabel"><i class="fa fa-table"></i> จัดการแบบทดสอบก่อนเรียน/หรือหลังเรียน</h4>
+        <h4 class="modal-title" id="itemModalLabel"><i class="fa fa-gamepad"></i> จัดการเกมส์</h4>
     </div>
 
     <div class="modal-body">
         <div class="row">
-            <div class="col-md-4"><?php
-                $items = [];
-                for($i=1; $i<=20; $i++){
-                    $items[$i] = $i;
-                    //array_push($items, $i);
-                }
-                echo $form->field($model, 'number')->dropDownList($items,['prompt'=>'--เลือกลำดับหัวข้อ--']);
-            ?></div>
+            <div class="col-md-4">
+                <?php
+                    echo $form->field($model, 'number')->textInput();
+                ?>
+            </div>
             <div class="col-md-8">
-                <?= $form->field($model, 'type')->dropDownList(['1'=>'แบบทดสอบก่อนเรียน','2'=>'แบบทดสอบหลังเรียน'],['prompt'=>'--เลือกประเภท--']) ?>
+                <?php 
+                    $items = \yii\helpers\ArrayHelper::map(backend\models\GameType::find()->all(), 'id', 'name');
+                ?>
+                <?= $form->field($model, 'type')->dropDownList($items,['prompt'=>'--เลือกประเภท--']) ?>
             </div>
             
         </div>
         
          <div class="row">
             <div class="col-md-12">
-                    <?php 
-                        $items = ['ก'=>'ก','ข'=>'ข','ค'=>'ค','ง'=>'ง'];
-                       echo $form->field($model, 'answer')->inline()->radioList($items); 
+                    <?php  
+                       echo $form->field($model, 'answer')->textInput(); 
                     ?>
             </div>
              <div class="col-md-12">

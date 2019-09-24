@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Test;
-use backend\models\search\Test as TestSearch;
+use backend\models\Game;
+use backend\models\search\Game as GameSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -13,9 +13,9 @@ use yii\web\Response;
 use appxq\sdii\helpers\SDHtml;
 
 /**
- * TestController implements the CRUD actions for Test model.
+ * GameController implements the CRUD actions for Game model.
  */
-class TestController extends Controller
+class GameController extends Controller
 {
     public function behaviors()
     {
@@ -56,12 +56,12 @@ class TestController extends Controller
     }
     
     /**
-     * Lists all Test models.
+     * Lists all Game models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TestSearch();
+        $searchModel = new GameSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -71,7 +71,7 @@ class TestController extends Controller
     }
 
     /**
-     * Displays a single Test model.
+     * Displays a single Game model.
      * @param integer $id
      * @return mixed
      */
@@ -89,23 +89,24 @@ class TestController extends Controller
     }
 
     /**
-     * Creates a new Test model.
+     * Creates a new Game model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
 	if (Yii::$app->getRequest()->isAjax) {
-	    $model = new Test();
+	    $model = new Game();
 
 	    if ($model->load(Yii::$app->request->post())) {
-		Yii::$app->response->format = Response::FORMAT_JSON;
+                $model->create_by = \common\modules\user\classes\CNUserFunc::getUserId();
 		if ($model->save()) {
 		    return \cpn\chanpan\classes\CNMessage::getSuccess('Create successfully');
 		} else {
 		    return \cpn\chanpan\classes\CNMessage::getError('Can not create the data.');
 		}
 	    } else {
+                $model->number = rand(00,999);
 		return $this->renderAjax('create', [
 		    'model' => $model,
 		]);
@@ -116,7 +117,7 @@ class TestController extends Controller
     }
 
     /**
-     * Updates an existing Test model.
+     * Updates an existing Game model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,7 +128,7 @@ class TestController extends Controller
 	    $model = $this->findModel($id);
 
 	    if ($model->load(Yii::$app->request->post())) {
-		Yii::$app->response->format = Response::FORMAT_JSON;
+		$model->create_by = \common\modules\user\classes\CNUserFunc::getUserId();
 		if ($model->save()) {
 		    return \cpn\chanpan\classes\CNMessage::getSuccess('Update successfully');
 		} else {
@@ -144,7 +145,7 @@ class TestController extends Controller
     }
 
     /**
-     * Deletes an existing Test model.
+     * Deletes an existing Game model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -152,7 +153,7 @@ class TestController extends Controller
     public function actionDelete($id)
     {
 	if (Yii::$app->getRequest()->isAjax) {
-	    Yii::$app->response->format = Response::FORMAT_JSON;
+	     
 	    if ($this->findModel($id)->delete()) {
 		return \cpn\chanpan\classes\CNMessage::getSuccess('Delete successfully'); 
 	    } else {
@@ -165,7 +166,7 @@ class TestController extends Controller
 
     public function actionDeletes() {
 	if (Yii::$app->getRequest()->isAjax) {
-	    Yii::$app->response->format = Response::FORMAT_JSON;
+	     
 	    if (isset($_POST['selection'])) {
 		foreach ($_POST['selection'] as $id) {
 		    $this->findModel($id)->delete();
@@ -179,16 +180,100 @@ class TestController extends Controller
 	}
     }
     
+    public function actionGameAll() { 
+        $gameType = \backend\models\GameType::find()->all(); 
+        return $this->render('game-all',[
+            'types'=>$gameType
+        ]);
+    }
+    public function actionLoadGame(){
+        $type = Yii::$app->request->get('type');
+        $gameType = \backend\models\GameType::findOne($type);
+        $games = Game::find()
+                    ->where(['type' => $type])
+                    ->orderBy(new \yii\db\Expression('rand()'))->limit(10)
+                 ->all();
+        $ids=[];
+        foreach($games as $k=>$v){
+            array_push($ids,$v['id']);
+        }
+        $ids = implode(',', $ids);
+        $model = new \backend\models\Players();
+        $model->id = time();
+        $model->games = $ids;
+        $model->scores = 0;
+        $model->type = $type;
+        $model->times= 60;
+        $model->index= 0;
+        $model->user_id = \common\modules\user\classes\CNUserFunc::getUserId();
+        if(!$model->save()){
+            \appxq\sdii\utils\VarDumper::dump($model->errors);
+        }
+        return $this->redirect(['/game/player?id='.$model->id]);
+    }
+
+    public function actionPlayer() {
+         $id = Yii::$app->request->get('id'); 
+         $player = \backend\models\Players::findOne($id);
+         $gameType = \backend\models\GameType::findOne($player['type']);
+         $ids = explode(',', $player['games']);  
+         //\appxq\sdii\utils\VarDumper::dump($id); 
+         return $this->render('player',[
+            'player'=>$player,
+            'gameType'=>$gameType 
+         ]);
+    }
+    public function actionLoadPlayer() {
+        $id = Yii::$app->request->get('id');
+        $game = Game::find()
+                ->where(['id' => $id])->one();
+        if($game){
+            return $game['question'];
+        }
+    }
+    public function actionGetScore() {
+        $id = Yii::$app->request->get('id');
+        $player = \backend\models\Players::findOne($id);
+        //\appxq\sdii\utils\VarDumper::dump($player);
+        if($player){
+            return $player['scores'];
+        }
+    }
+    public function actionCheckAnswer() {
+        $gameid     = \Yii::$app->request->post('gameid');
+        $playerid   = \Yii::$app->request->post('playerid'); 
+        $value = \Yii::$app->request->post('value');
+        $num = \Yii::$app->request->post('num');
+        
+        $score = 0;
+        $game = Game::find()->where(['id' => $gameid])->one();
+        
+        $player = \backend\models\Players::findOne($playerid);
+        $answer = isset($game['answer']) ? $game['answer'] : '';
+        $player->index = $num;
+         
+        if($value == $answer){
+            $score += 1;
+            $player->scores += $score; 
+        } 
+        $player->save();
+        return $player->scores; 
+    }
+    
+    public function actionGameOver() {
+//        $playerid   = \Yii::$app->request->post('playerid');
+//        $player = \backend\models\Players::findOne($playerid);
+    }
     /**
-     * Finds the Test model based on its primary key value.
+     * Finds the Game model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Test the loaded model
+     * @return Game the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Test::findOne($id)) !== null) {
+        if (($model = Game::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
