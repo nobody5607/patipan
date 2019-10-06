@@ -70,7 +70,7 @@ AppAsset::register($this);
         $fullName = \common\modules\user\classes\CNUserFunc::getFullName();
         $img = \common\modules\user\classes\CNUserFunc::getImagePath();
         $menuItems[] = [
-            'label' =>"<img src='{$img}' class='user-image' style='width:30px;border-radius:10px;'> ".$fullName,
+            'label' =>"<img src='{$img}' class='user-image' style='width:20px;border-radius:10px;'> ".$fullName,
             'visible' => !Yii::$app->user->isGuest,
             'items' => [
                 ['label' => '<i class="fa fa-user"></i> '.Yii::t('appmenu','User Profile'), 'url' => ['/user/settings/profile']],
