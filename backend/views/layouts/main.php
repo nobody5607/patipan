@@ -51,6 +51,11 @@ AppAsset::register($this);
             'icon' => 'users', 'url' => ['/user/admin/index'],
             'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
         ];
+        $menuItems[] = [
+            'label' => 'จัดการนักเรียน',
+            'icon' => 'users', 'url' => ['/student/index'],
+            'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+        ];
         $menuItems[] = ['label' => 'จัดการบทเรียน', 'icon' => 'book', 'url' => ['/lessons/index'], 'visible' => !Yii::$app->user->isGuest];
         $menuItems[] = [
             'label' => 'จัดการเกมส์',
