@@ -119,6 +119,10 @@
       $("#btnStartgame").show();
     }
     myTimer();
+
+    setTimeout(function(){ 
+        $('img').css({width:'100%'});
+    },500);
      
 </script>
 <?php

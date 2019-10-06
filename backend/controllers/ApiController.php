@@ -92,7 +92,7 @@ class ApiController extends \yii\web\Controller
         }
         $term = \Yii::$app->request->get('term', '');
         $lesson = Lessons::find()
-            ->where('name like :name', [':name' => "%{$term}%"])
+            ->where('name like :name AND rstat not in(0,3)', [':name' => "%{$term}%"])
             ->orderBy(['forder' => SORT_ASC])->all();
         if ($lesson) {
             return $this->responseData(true, $lesson);
