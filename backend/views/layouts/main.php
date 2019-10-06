@@ -40,11 +40,12 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+ 	['label' => 'เล่นเกมส์', 'url' => ['/game/game-all']]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
-        $menuItems[] = [
+          $menuItems[] = [
                         'label' => 'จัดการผู้ใช้', 
                         'icon' => 'users', 'url' => ['/user/admin/index'],
                         'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
@@ -55,15 +56,11 @@ AppAsset::register($this);
                         'icon' => 'users', 'url' => ['/game/index'],
                         'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
                     ];
-        
-        $menuItems[] = '<li style="padding-top:10px;">'
-            . Html::beginForm(['/user/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+                    $menuItems[] = [
+                        'label' => 'ตั้งค่า', 
+                        'icon' => 'users', 'url' => ['/options/index'],
+                        'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+                    ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -74,7 +71,7 @@ AppAsset::register($this);
 
     <div class="container">
         <br/><br/><br/>
-        <?= Alert::widget() ?>
+        
         <?= $content ?>
     </div>
 </div>

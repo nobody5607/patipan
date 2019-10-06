@@ -1,13 +1,25 @@
 <?php
 
 namespace common\modules\user\controllers;
-
+use yii\filters\VerbFilter;
 use cpn\chanpan\utils\CNUtils;
 use dektrium\user\controllers\SecurityController as BaseSecurityController;
 use common\modules\user\models\LoginForm;
 
 class SecurityController extends BaseSecurityController {
 
+
+    public function behaviors()
+    {
+        return [ 
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['get'],
+                ],
+            ],
+        ];
+    }
     //put your code here
     public function actionLogin() {
 
