@@ -17,32 +17,7 @@ use appxq\sdii\helpers\SDHtml;
  */
 class GameController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-/*	    'access' => [
-		'class' => AccessControl::className(),
-		'rules' => [
-		    [
-			'allow' => true,
-			'actions' => ['index', 'view'], 
-			'roles' => ['?', '@'],
-		    ],
-		    [
-			'allow' => true,
-			'actions' => ['view', 'create', 'update', 'delete', 'deletes'], 
-			'roles' => ['@'],
-		    ],
-		],
-	    ],*/
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+
 
     public function beforeAction($action) {
 	if (parent::beforeAction($action)) {
@@ -182,7 +157,7 @@ class GameController extends Controller
     
     public function actionGameAll() { 
         $gameType = \backend\models\GameType::find()->all(); 
-        return $this->render('game-all',[
+        return $this->renderAjax('game-all',[
             'types'=>$gameType
         ]);
     }
@@ -218,7 +193,7 @@ class GameController extends Controller
          $gameType = \backend\models\GameType::findOne($player['type']);
          $ids = explode(',', $player['games']);  
          //\appxq\sdii\utils\VarDumper::dump($id); 
-         return $this->render('player',[
+         return $this->renderAjax('player',[
             'player'=>$player,
             'gameType'=>$gameType 
          ]);
@@ -240,10 +215,15 @@ class GameController extends Controller
         }
     }
     public function actionCheckAnswer() {
-        $gameid     = \Yii::$app->request->post('gameid');
-        $playerid   = \Yii::$app->request->post('playerid'); 
-        $value = \Yii::$app->request->post('value');
-        $num = \Yii::$app->request->post('num');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: DELETE, POST, GET, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,x-token');
+        \Yii::$app->controller->enableCsrfValidation = false;
+
+        $gameid     = \Yii::$app->request->get('gameid');
+        $playerid   = \Yii::$app->request->get('playerid');
+        $value = \Yii::$app->request->get('value');
+        $num = \Yii::$app->request->get('num');
         
         $score = 0;
         $game = Game::find()->where(['id' => $gameid])->one();
