@@ -17,8 +17,8 @@ use yii\bootstrap\Nav;
  * @var string $content
  */
 
-$this->title = Yii::t('user', 'Update user account');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
+$this->title = Yii::t('user', 'จัดการครู');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'จัดการครู'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

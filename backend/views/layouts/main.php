@@ -47,7 +47,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
         $menuItems[] = [
-            'label' => 'จัดการผู้ใช้',
+            'label' => 'จัดการครู',
             'icon' => 'users', 'url' => ['/user/admin/index'],
             'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
         ];

@@ -8,7 +8,7 @@ use appxq\sdii\widgets\ModalForm;
 use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml;
 
-$this->title = 'จัดการผู้ใช้';
+$this->title = 'จัดการครู';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

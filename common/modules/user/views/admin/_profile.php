@@ -6,7 +6,7 @@ use appxq\sdii\helpers\SDHtml;
 use appxq\sdii\helpers\SDNoty;
 $this->title = Yii::t('chanpan', 'แก้ไข').' '.Yii::t('chanpan', 'ผู้ใช้');
 
-$this->params['breadcrumbs'][] = ['label' => 'ผู้ใช้', 'url' => ['/admin/user']];
+$this->params['breadcrumbs'][] = ['label' => 'จัดการครู', 'url' => ['/admin/user']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
  
