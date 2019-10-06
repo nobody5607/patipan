@@ -41,7 +41,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'เล่นเกมส์', 'url' => ['/game/game-all']]
+        ['label' => 'ทดสอบเกมส์', 'url' => ['/game/game-all']]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
