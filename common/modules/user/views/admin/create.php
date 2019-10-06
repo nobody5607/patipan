@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use appxq\sdii\helpers\SDNoty;
 use appxq\sdii\helpers\SDHtml; 
  
-$this->title = Yii::t('user', 'เพิ่มครูผู้สอนคอมพิวเตอร์');  
+$this->title = Yii::t('user', 'เพิ่มครูผู้สอน');  
 ?>
 
 <div class="modal-header">
