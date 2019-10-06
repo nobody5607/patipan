@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use backend\assets\AppAsset;
@@ -40,29 +41,41 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
- 	['label' => 'เล่นเกมส์', 'url' => ['/game/game-all']]
+        ['label' => 'เล่นเกมส์', 'url' => ['/game/game-all']]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
-          $menuItems[] = [
-                        'label' => 'จัดการผู้ใช้', 
-                        'icon' => 'users', 'url' => ['/user/admin/index'],
-                        'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
-                    ];
+        $menuItems[] = [
+            'label' => 'จัดการผู้ใช้',
+            'icon' => 'users', 'url' => ['/user/admin/index'],
+            'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+        ];
         $menuItems[] = ['label' => 'จัดการบทเรียน', 'icon' => 'book', 'url' => ['/lessons/index'], 'visible' => !Yii::$app->user->isGuest];
         $menuItems[] = [
-                        'label' => 'จัดการเกมส์', 
-                        'icon' => 'users', 'url' => ['/game/index'],
-                        'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
-                    ];
-                    $menuItems[] = [
-                        'label' => 'ตั้งค่า', 
-                        'icon' => 'users', 'url' => ['/options/index'],
-                        'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
-                    ];
+            'label' => 'จัดการเกมส์',
+            'icon' => 'users', 'url' => ['/game/index'],
+            'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+        ];
+        $menuItems[] = [
+            'label' => 'ตั้งค่า',
+            'icon' => 'users', 'url' => ['/options/index'],
+            'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
+        ];
+        $fullName = \common\modules\user\classes\CNUserFunc::getFullName();
+        $img = \common\modules\user\classes\CNUserFunc::getImagePath();
+        $menuItems[] = [
+            'label' =>"<img src='{$img}' class='user-image' style='width:30px;border-radius:10px;'> ".$fullName,
+            'visible' => !Yii::$app->user->isGuest,
+            'items' => [
+                ['label' => '<i class="fa fa-user"></i> '.Yii::t('appmenu','User Profile'), 'url' => ['/user/settings/profile']],
+                '<li class="divider"></li>',
+                ['label' => '<i class="fa fa-sign-out"></i> '.Yii::t('appmenu','Logout'), 'url' => ['/user/security/logout'], 'linkOptions' => ['data-method' => 'get']],
+            ],
+        ];
     }
     echo Nav::widget([
+        'encodeLabels'=>false,
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
@@ -71,14 +84,14 @@ AppAsset::register($this);
 
     <div class="container">
         <br/><br/><br/>
-        
+
         <?= $content ?>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p> 
+        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
     </div>
 </footer>
 
