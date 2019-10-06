@@ -46,6 +46,7 @@ class LessonsController extends Controller
 
     public function beforeAction($action) {
 	if (parent::beforeAction($action)) {
+		\Yii::$app->language = 'th';
 	    if (in_array($action->id, array('create', 'update'))) {
 		
 	    }

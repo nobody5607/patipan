@@ -11,13 +11,13 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'language' => 'en-US',
+    'language' => 'th',
     'timeZone' => 'Asia/Bangkok',
     'bootstrap' => ['log',
         'backend\components\AppComponent',
         [ 
             'class' => 'common\components\LanguageSelector',
-            'supportedLanguages' => ['en-US', 'th-TH'], //กำหนดรายการภาษาที่ support หรือใช้ได้
+            'supportedLanguages' => ['th-TH'], //กำหนดรายการภาษาที่ support หรือใช้ได้
         ]
     ],
     'components' => [

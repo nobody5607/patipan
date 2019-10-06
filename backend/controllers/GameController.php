@@ -21,6 +21,7 @@ class GameController extends Controller
 
     public function beforeAction($action) {
 	if (parent::beforeAction($action)) {
+        \Yii::$app->language = 'th';
 	    if (in_array($action->id, array('create', 'update'))) {
 		
 	    }
@@ -36,6 +37,7 @@ class GameController extends Controller
      */
     public function actionIndex()
     {
+       
         $searchModel = new GameSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

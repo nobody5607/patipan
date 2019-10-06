@@ -20,7 +20,7 @@ class CNMessage {
             'data'=>$data,
             'status' => 'success',
             'action' => 'create',
-            'message' => \cpn\chanpan\helpers\CNHtml::getMsgSuccess() . Yii::t('chanpan', $message),
+            'message' => Yii::t('app', $message),
         ];
         return $result;
     }
@@ -29,7 +29,7 @@ class CNMessage {
         $result = [
             'status' => 'error',
             'action' => 'create',
-            'message' => \cpn\chanpan\helpers\CNHtml::getMsgError() . Yii::t('chanpan', $message),
+            'message' =>Yii::t('app', $message),
             'data'=>$data
         ];
         return $result;

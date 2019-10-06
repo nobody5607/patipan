@@ -61,5 +61,14 @@ return [
     'Informations'=>'ประชาสัมพันธ์',
     'Passwords do not match'=>'รหัสผ่านไม่ตรงกัน',
     'Confirm Password'=>'ยืนยันรหัสผ่าน',
+
+    'Create successfully'=>'เพิ่มข้อมูลสำเร็จ',
+    'Can not create the data.'=>'เพิ่มข้อมูลไม่สำเร็จ',
+
+    'Update successfully'=>'แก้ไขข้อมูลสำเร็จ',
+    'Can not update the data.'=>'แก้ไขข้อมูลไม่สำเร็จ',
+
+    'Delete successfully'=>'ลบข้อมูลสำเร็จ',
+    'Can not delete the data.'=>'ลบข้อมูลไม่สำเร็จ',
     
 ];
