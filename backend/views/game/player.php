@@ -129,7 +129,8 @@
     body{
         background:url(<?= \yii\helpers\Url::to('@web/img/bggame.png')?>) center;
         background-attachment: fixed;
-        background-size: contain;
+        background-size: cover;
+        padding: 20px;
     }
     .input-lg {
         height: 60px !important;
