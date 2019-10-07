@@ -9,6 +9,7 @@
 namespace backend\controllers;
 
 use backend\models\Lessons;
+use backend\models\Student;
 use common\modules\user\models\Profile;
 use common\modules\user\models\User;
 use yii\web\UnauthorizedHttpException;
@@ -22,7 +23,6 @@ class ApiController extends \yii\web\Controller
 {
 
     private $user_id = null;
-
     public function beforeAction($action)
     {
         header('Access-Control-Allow-Origin: *');
@@ -47,7 +47,7 @@ class ApiController extends \yii\web\Controller
         ];
     }
     private function validateUser($token){
-        $user = User::find()->where('auth_key=:token',[
+        $user = Student::find()->where('token=:token',[
             ':token' => $token
         ])->one();
         if($user){
@@ -60,25 +60,13 @@ class ApiController extends \yii\web\Controller
         $username = \Yii::$app->request->post('username');
         $password = \Yii::$app->request->post('password');
         $output = [];
-        //Yii::$app->getSecurity()->validatePassword($password, $this->password_hash);
-        $user = User::find()->where('username=:username', [
-            ':username' => $username
+        $user = Student::find()->where('id=:id AND password=:password',[
+            ':id'=>$username,
+            ':password' => $password
         ])->one();
-
         if ($user) {
-            $checkUser = \Yii::$app->getSecurity()->validatePassword($password, $user->password_hash);
-            if ($checkUser === true) {
-                $profile = Profile::findOne($user->id);
-                if($profile){
-                    $output=[
-                        'id'=>"{$user->id}",
-                        'username'=>$user->username,
-                        'email'=>$user->email,
-                        'name'=>"{$profile->firstname} {$profile->lastname}",
-                        'token'=>$user->auth_key
-                    ];
-                    return $this->responseData(true, $output);
-                }
+            if ($user) {
+                return $this->responseData(true, $user);
             }else{
                 return $this->responseData(false, []);
             }
