@@ -94,6 +94,7 @@
         if(num >= games.length-1){ 
             hideInput();
             $("#btnStartgame").show();
+            myStopFunction();
             return false;
         }
         num ++;
