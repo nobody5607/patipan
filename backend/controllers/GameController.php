@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Game;
 use backend\models\search\Game as GameSearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -239,7 +240,7 @@ class GameController extends Controller
             $player->scores += $score; 
         } 
         $player->save();
-        return $player->scores; 
+        return Json::encode(['score'=>$score,'total'=>$player->scores]);
     }
     
     public function actionGameOver() {

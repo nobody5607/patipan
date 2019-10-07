@@ -76,11 +76,20 @@
         let gameid = $("#answer").val();
         let value = $("#answer2").val();
         $.get(url,{playerid:playerId,gameid:gameid,value:value,num:num+1},function(res){
-            $("#score").html(res);
-            id = games[num];
-            $('#answer').val(id);
-            loadPlayer(id);
-            clearInput();
+            res = JSON.parse(res);
+            if(res != null){
+                $("#score").html(res['total']);
+                id = games[num];
+                $('#answer').val(id);
+                loadPlayer(id);
+                clearInput();
+                if(res['score'] > 0){
+                    playCorrect();
+                }else{
+                    playWrong();
+                }
+            }
+
         });
         if(num >= games.length-1){ 
             hideInput();
@@ -181,17 +190,44 @@
 </style>
 <?php \appxq\sdii\widgets\CSSRegister::end();?>
 
+
+
+<audio id="Correct">
+    <source src="<?= \yii\helpers\Url::to('@web/mp3/ถูก.mp3') ?>" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="Wrong">
+    <source src="<?= \yii\helpers\Url::to('@web/mp3/ผิด.mp3') ?>" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
 <?php \richardfan\widget\JSRegister::begin(); ?>
 <script>
     var x = document.getElementById("myAudio");
 
+    var correct = document.getElementById("Correct");
+    var wrong = document.getElementById("Wrong");
+
     function playAudio() {
         x.play();
     }
-
     function pauseAudio() {
         x.pause();
     }
+
+    function playCorrect() {
+        correct.play();
+    }
+    function playWrong() {
+        wrong.play();
+    }
+    function pauseCorrect() {
+        correct.pause();
+    }
+    function pauseWrong() {
+        wrong.pause();
+    }
+
 
     setTimeout(function () {
         $(".btnPlayMusic").trigger('click');
