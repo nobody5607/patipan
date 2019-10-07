@@ -8,6 +8,7 @@
 
 namespace backend\controllers;
 
+use appxq\sdii\utils\VarDumper;
 use backend\models\Lessons;
 use backend\models\Student;
 use common\modules\user\models\Profile;
@@ -64,6 +65,7 @@ class ApiController extends \yii\web\Controller
             ':id'=>$username,
             ':password' => $password
         ])->one();
+
         if ($user) {
             if ($user) {
                 return $this->responseData(true, $user);

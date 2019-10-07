@@ -11,7 +11,7 @@
                     class="glyphicon glyphicon-pause"></i> ปิดเสียง
         </button>
         <audio id="myAudio">
-            <source src="<?= \yii\helpers\Url::to('@web/mp3/1.mp3') ?>" type="audio/mpeg">
+            <source src="<?= \yii\helpers\Url::to('@web/mp3/bg.mp3') ?>" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
