@@ -47,3 +47,13 @@
     }, 1000);
 </script>
 <?php \richardfan\widget\JSRegister::end(); ?>
+
+<?php \appxq\sdii\widgets\CSSRegister::begin();?>
+<style>
+    body{
+        background: white url("<?= \yii\helpers\Url::to('@web/img/gameall.jpg')?>") center;
+        background-size: contain;
+        background-attachment: fixed;
+    }
+</style>
+<?php \appxq\sdii\widgets\CSSRegister::end();?>
