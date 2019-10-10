@@ -23,7 +23,11 @@
         <?php foreach ($types as $k => $v): ?>
             <div style="margin-bottom: 15px;">
                 <a style="font-size:20pt;font-weight: bold;" href="<?= yii\helpers\Url::to(["/game/load-game?type={$v['id']}"]) ?>"
-                   class="btn btn-default btn-lg btn-block"><i class="fa fa-gamepad"></i> <?= $v['name']; ?>
+                   class="">
+                    <?php
+                        $image = \yii\helpers\Url::to('@web/img/').$v['image']
+                    ?>
+                    <img src="<?= $image; ?>" class="img img-responsive">
                 </a>
             </div>
         <?php endforeach; ?>
