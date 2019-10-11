@@ -162,6 +162,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
         ?>
 <script>
+    $( "td:eq(0)" ).addClass('iconTb text-center');
+    setTimeout(function(){
+        $('.iconTb').html("<i title='ค้นหา' class='glyphicon glyphicon-search'></i>");
+    });
     $("#btnCreate").on('click', function(){
         const url = "<?= Url::to(['/user/admin/create'])?>";
         modalUser(url);

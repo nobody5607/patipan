@@ -112,6 +112,11 @@ $this->params['breadcrumbs'][] = $this->title;
     'position' => \yii\web\View::POS_READY
 ]); ?>
     <script>
+        $( "td:eq(0)" ).addClass('iconTb text-center');
+        setTimeout(function(){
+            $('.iconTb').html("<i title='ค้นหา' class='glyphicon glyphicon-search'></i>");
+        });
+
         // JS script
         $('#modal-addbtn-lessons').on('click', function () {
             modalLesson($(this).attr('data-url'));
