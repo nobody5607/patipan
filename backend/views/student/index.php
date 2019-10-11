@@ -20,30 +20,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-header">
         <i class="fa fa-user"></i> <?=  Html::encode($this->title) ?>
         <div class="pull-right">
-            <?= Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['student/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-student']). ' ' .
-		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['student/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-student', 'disabled'=>false]) 
-             ?>
+            <?= Html::button('เพิ่มนักเรียน'.SDHtml::getBtnAdd(), [
+                    'data-url'=>Url::to(['student/create']),
+                    'class' => 'btn btn-success btn-sm',
+                    'id'=>'modal-addbtn-student']);
+            ?>
         </div>
     </div>
     <div class="box-body">
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
         <?php  Pjax::begin(['id'=>'student-grid-pjax']);?>
-        <?= GridView::widget([
+        <?= \kartik\grid\GridView::widget([
 	'id' => 'student-grid',
-/*	'panelBtn' => Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['student/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-student']). ' ' .
-		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['student/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-student', 'disabled'=>true]),*/
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
         'columns' => [
-	    [
-		'class' => 'yii\grid\CheckboxColumn',
-		'checkboxOptions' => [
-		    'class' => 'selectionStudentIds'
-		],
-		'headerOptions' => ['style'=>'text-align: center;'],
-		'contentOptions' => ['style'=>'width:40px;text-align: center;'],
-	    ],
+
 	    [
 		'class' => 'yii\grid\SerialColumn',
 		'headerOptions' => ['style'=>'text-align: center;'],
