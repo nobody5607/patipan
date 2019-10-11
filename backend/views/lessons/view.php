@@ -39,7 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			}
 		],
 		//'update_by',
-		'update_date',  
+            [
+                'attribute' => 'create_date',
+                'value' => function ($model) {
+                    if(isset($model->create_date)){
+                        return \appxq\sdii\utils\SDdate::mysql2phpDate($model->create_date);
+                    }
+                }
+            ],
 		
 	    ],
 	]) ?>
