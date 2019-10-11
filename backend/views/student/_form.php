@@ -82,14 +82,8 @@ use appxq\sdii\helpers\SDHtml;
         ).done(function (result) {
             if (result.status == 'success') {
                 <?= SDNoty::show('result.message', 'result.status')?>
-                if (result.action == 'create') {
-                    //$(\$form).trigger('reset');
-                    $(document).find('#modal-student').modal('hide');
-                    $.pjax.reload({container: '#student-grid-pjax'});
-                } else if (result.action == 'update') {
-                    $(document).find('#modal-student').modal('hide');
-                    $.pjax.reload({container: '#student-grid-pjax'});
-                }
+                $(document).find('#modal-student').modal('hide');
+                location.reload();
             } else {
                 <?= SDNoty::show('result.message', 'result.status')?>
             }

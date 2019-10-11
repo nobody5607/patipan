@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Pjax;
 use yii\helpers\Url;
 use appxq\sdii\widgets\GridView;
 use appxq\sdii\widgets\ModalForm;
@@ -16,21 +15,22 @@ $this->title = Yii::t('app', 'จัดการนักเรียน');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="box box-primary">
-    <div class="box-header">
-        <i class="fa fa-user"></i> <?=  Html::encode($this->title) ?>
-        <div class="pull-right">
-            <?= Html::button('เพิ่มนักเรียน'.SDHtml::getBtnAdd(), [
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-9 col-xs-9 col-sm-9">
+                <label><i class="fa fa-user"></i> <?= Html::encode($this->title) ?></label>
+            </div>
+            <div class="col-md-3 col-xs-3 col-sm-3 text-right">
+                <?= Html::button('เพิ่มนักเรียน '.SDHtml::getBtnAdd(), [
                     'data-url'=>Url::to(['student/create']),
-                    'class' => 'btn btn-success btn-sm',
+                    'class' => 'btn btn-success btn-xs',
                     'id'=>'modal-addbtn-student']);
-            ?>
+                ?>
+            </div>
         </div>
     </div>
-    <div class="box-body">
-        <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
-
-        <?php  Pjax::begin(['id'=>'student-grid-pjax']);?>
+    <div class="panel-body">
         <?= \kartik\grid\GridView::widget([
 	'id' => 'student-grid',
 	'dataProvider' => $dataProvider,
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 yii\helpers\Url::to(['student/delete?id='.$model->id]), [
                                 'title' => Yii::t('app', 'Delete'),
                                 'class' => 'btn btn-danger btn-xs',
-                                'data-confirm' => Yii::t('chanpan', 'Are you sure you want to delete this item?'),
+                                'data-confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                                 'data-method' => 'post',
                                 'data-action' => 'delete',
                                 'data-pjax'=>0
@@ -112,8 +112,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	    ],
         ],
     ]); ?>
-        <?php  Pjax::end();?>
-
     </div>
 </div>
 <?=  ModalForm::widget([
@@ -138,46 +136,20 @@ $('#modal-addbtn-student').on('click', function() {
     modalStudent($(this).attr('data-url'));
 });
 
-$('#modal-delbtn-student').on('click', function() {
-    selectionStudentGrid($(this).attr('data-url'));
-});
 
-$('#student-grid-pjax').on('click', '.select-on-check-all', function() {
-    window.setTimeout(function() {
-        var key = $('#student-grid').yiiGridView('getSelectedRows');
-        disabledStudentBtn(key.length);
-    }, 100);
-});
-
-$('.selectionCoreOptionIds').on('click', function() {
-    var key = $('input:checked[class=\"' + $(this).attr('class') + '\"]');
-    disabledStudentBtn(key.length);
-});
-
-$('#student-grid-pjax').on('dblclick', 'tbody tr', function() {
-    var id = $(this).attr('data-key');
-    modalStudent('<?= Url::to(['student/update', 'id'=>''])?>' + id);
-});
-
-$('#student-grid-pjax').on('click', 'tbody tr td a', function() {
+$('.kv-grid-table').on('click', 'tbody tr td a', function() {
     var url = $(this).attr('href');
     var action = $(this).attr('data-action');
 
     if (action === 'update' || action === 'view') {
         modalStudent(url);
     } else if (action === 'delete') {
-        yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete this item?')?>', function() {
+        yii.confirm('<?= Yii::t('app', 'Are you sure you want to delete this item?')?>', function() {
             $.post(
                 url
             ).done(function(result) {
-                if (result.status == 'success') {
-                    <?= SDNoty::show('result.message', 'result.status')?>
-                    $.pjax.reload({
-                        container: '#student-grid-pjax'
-                    });
-                } else {
-                    <?= SDNoty::show('result.message', 'result.status')?>
-                }
+                <?= SDNoty::show('result.message', 'result.status')?>
+                location.reload();
             }).fail(function() {
                 <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
                 console.log('server error');
@@ -186,35 +158,6 @@ $('#student-grid-pjax').on('click', 'tbody tr td a', function() {
     }
     return false;
 });
-
-function disabledStudentBtn(num) {
-    if (num > 0) {
-        $('#modal-delbtn-student').attr('disabled', false);
-    } else {
-        $('#modal-delbtn-student').attr('disabled', true);
-    }
-}
-
-function selectionStudentGrid(url) {
-    yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete these items?')?>', function() {
-        $.ajax({
-            method: 'POST',
-            url: url,
-            data: $('.selectionStudentIds:checked[name=\"selection[]\"]').serialize(),
-            dataType: 'JSON',
-            success: function(result, textStatus) {
-                if (result.status == 'success') {
-                    <?= SDNoty::show('result.message', 'result.status')?>
-                    $.pjax.reload({
-                        container: '#student-grid-pjax'
-                    });
-                } else {
-                    <?= SDNoty::show('result.message', 'result.status')?>
-                }
-            }
-        });
-    });
-}
 
 function modalStudent(url) {
     $('#modal-student .modal-content').html('<div class=\"sdloader \"><i class=\"sdloader-icon\"></i></div>');

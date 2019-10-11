@@ -67,14 +67,8 @@ $('form#<?= $model->formName()?>').on('beforeSubmit', function(e) {
     ).done(function(result) {
         if(result.status == 'success') {
             <?= SDNoty::show('result.message', 'result.status')?>
-            if(result.action == 'create') {
-                //$(\$form).trigger('reset');
-                $(document).find('#modal-lessons').modal('hide');
-                $.pjax.reload({container:'#lessons-grid-pjax'});
-            } else if(result.action == 'update') {
-                $(document).find('#modal-lessons').modal('hide');
-                $.pjax.reload({container:'#lessons-grid-pjax'});
-            }
+            $(document).find('#modal-lessons').modal('hide');
+            location.reload();
         } else {
             <?= SDNoty::show('result.message', 'result.status')?>
         } 

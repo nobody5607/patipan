@@ -16,19 +16,26 @@ $this->title = Yii::t('app', 'จัดการบทเรียน');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-    <div class="box box-primary">
-        <div class="box-header">
-            <i class="fa fa-book"></i> <?= Html::encode($this->title) ?>
-            <div class="pull-right">
-                <?= Html::button(SDHtml::getBtnAdd(), ['data-url' => Url::to(['lessons/create']), 'class' => 'btn btn-success btn-sm', 'id' => 'modal-addbtn-lessons']) . ' ' .
-                Html::button(SDHtml::getBtnDelete(), ['data-url' => Url::to(['lessons/deletes']), 'class' => 'btn btn-danger btn-sm', 'id' => 'modal-delbtn-lessons', 'disabled' => false])
-                ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-9 col-xs-9 col-sm-9">
+                    <label><i class="fa fa-book"></i> <?= Html::encode($this->title) ?></label>
+                </div>
+                <div class="col-md-3 col-xs-3 col-sm-3 text-right">
+                    <?= Html::button('เพิ่มบทเรียน '.SDHtml::getBtnAdd(),
+                        [
+                            'data-url' => Url::to(['lessons/create']),
+                            'class' => 'btn btn-success btn-xs',
+                            'id' => 'modal-addbtn-lessons'
+                        ])?>
+                </div>
             </div>
         </div>
-        <div class="box-body">
+        <div class="panel-body">
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-            <?php Pjax::begin(['id' => 'lessons-grid-pjax']); ?>
+
             <?= GridView::widget([
                 'id' => 'lessons-grid',
                 /*	'panelBtn' => Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['lessons/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-lessons']). ' ' .
@@ -97,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
-            <?php Pjax::end(); ?>
+
 
         </div>
     </div>
@@ -122,35 +129,15 @@ $this->params['breadcrumbs'][] = $this->title;
             modalLesson($(this).attr('data-url'));
         });
 
-        $('#modal-delbtn-lessons').on('click', function () {
-            selectionLessonGrid($(this).attr('data-url'));
-        });
 
-        $('#lessons-grid-pjax').on('click', '.select-on-check-all', function () {
-            window.setTimeout(function () {
-                var key = $('#lessons-grid').yiiGridView('getSelectedRows');
-                disabledLessonBtn(key.length);
-            }, 100);
-        });
-
-        $('.selectionCoreOptionIds').on('click', function () {
-            var key = $('input:checked[class=\"' + $(this).attr('class') + '\"]');
-            disabledLessonBtn(key.length);
-        });
-
-        $('#lessons-grid-pjax').on('dblclick', 'tbody tr', function () {
-            var id = $(this).attr('data-key');
-            modalLesson('<?= Url::to(['lessons/update', 'id' => ''])?>' + id);
-        });
-
-        $('#lessons-grid-pjax').on('click', 'tbody tr td a', function () {
+        $('.table').on('click', 'tbody tr td a', function () {
             var url = $(this).attr('href');
             var action = $(this).attr('data-action');
 
             if (action === 'update' || action === 'view') {
                 modalLesson(url);
             } else if (action === 'delete') {
-                yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete this item?')?>', function () {
+                yii.confirm('<?= Yii::t('app', 'Are you sure you want to delete this item?')?>', function () {
                     $.post(
                         url
                     ).done(function (result) {
@@ -169,32 +156,6 @@ $this->params['breadcrumbs'][] = $this->title;
             return false;
         });
 
-        function disabledLessonBtn(num) {
-            if (num > 0) {
-                $('#modal-delbtn-lessons').attr('disabled', false);
-            } else {
-                $('#modal-delbtn-lessons').attr('disabled', true);
-            }
-        }
-
-        function selectionLessonGrid(url) {
-            yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete these items?')?>', function () {
-                $.ajax({
-                    method: 'POST',
-                    url: url,
-                    data: $('.selectionLessonIds:checked[name=\"selection[]\"]').serialize(),
-                    dataType: 'JSON',
-                    success: function (result, textStatus) {
-                        if (result.status == 'success') {
-                            <?= SDNoty::show('result.message', 'result.status')?>
-                            $.pjax.reload({container: '#lessons-grid-pjax'});
-                        } else {
-                            <?= SDNoty::show('result.message', 'result.status')?>
-                        }
-                    }
-                });
-            });
-        }
 
         function modalLesson(url) {
             $('#modal-lessons .modal-content').html('<div class=\"sdloader \"><i class=\"sdloader-icon\"></i></div>');

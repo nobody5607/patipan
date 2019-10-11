@@ -12,21 +12,19 @@ $this->title = 'จัดการครู';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="box box-primary">
-    <div class="box-header">
+<div class="panel panel-primary">
+    <div class="panel-heading">
         <div class="row">
-            <div class="col-md-10">
-                <div class="panel-title">
-                    <i class="fa fa-user"></i> <?= Html::encode($this->title); ?>
-                </div>
+            <div class="col-md-9 col-xs-9 col-sm-9">
+                <label><i class="fa fa-user"></i> <?= Html::encode($this->title) ?></label>
             </div>
-            
+            <div class="col-md-3 col-xs-3 col-sm-3 text-right">
+                <button class="btn btn-success btn-xs" id="btnCreate">เพิ่มครู</button>
+            </div>
         </div>
+
     </div>
-    <div class="box-body">
-        <div class="text-right">
-            <button class="btn btn-success" id="btnCreate">เพิ่มผู้ใช้</button>
-        </div>
+    <div class="panel-body">
 <?php Pjax::begin(['id' => 'user-grid-pjax']); ?>
         <div>
         <?=
