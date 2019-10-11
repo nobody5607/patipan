@@ -36,7 +36,7 @@ class Game extends \yii\db\ActiveRecord
             [['answer'], 'required','message'=>'เฉลยต้องไม่ว่างเปล่า'],
             [['number', 'create_by', 'update_by'], 'integer'],
             [['create_date', 'update_date','type'], 'safe'],
-            [['question'], 'string', 'max' => 255],
+            //[['question'], 'string', 'max' => 255],
             [['answer'], 'string', 'max' => 5],
         ];
     }

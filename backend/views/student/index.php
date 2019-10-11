@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons'=>[
                     'view'=>function($url, $model){
                         return Html::a('<span class="fa fa-eye"></span> '.Yii::t('app', 'View'), 
-                                    yii\helpers\Url::to(['student/view/'.$model->id]), [
+                                    yii\helpers\Url::to(['student/view?id='.$model->id]), [
                                     'title' => Yii::t('app', 'view'),
                                     'class' => 'btn btn-default btn-xs',
                                     'data-action'=>'view',
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'update'=>function($url, $model){
                         return Html::a('<span class="fa fa-edit"></span> '.Yii::t('app', 'แก้ไข'), 
-                                    yii\helpers\Url::to(['student/update/'.$model->id]), [
+                                    yii\helpers\Url::to(['student/update?id='.$model->id]), [
                                     'title' => Yii::t('app', 'Edit'),
                                     'class' => 'btn btn-primary btn-xs',
                                     'data-action'=>'update',
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'delete' => function ($url, $model) {                         
                         return Html::a('<span class="fa fa-trash"></span> '.Yii::t('app', 'Delete'), 
-                                yii\helpers\Url::to(['student/delete/'.$model->id]), [
+                                yii\helpers\Url::to(['student/delete?id='.$model->id]), [
                                 'title' => Yii::t('app', 'Delete'),
                                 'class' => 'btn btn-danger btn-xs',
                                 'data-confirm' => Yii::t('chanpan', 'Are you sure you want to delete this item?'),
