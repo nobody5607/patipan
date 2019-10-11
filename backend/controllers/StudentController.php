@@ -17,18 +17,6 @@ use appxq\sdii\helpers\SDHtml;
  */
 class StudentController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     public function beforeAction($action) {
 	if (parent::beforeAction($action)) {
         \Yii::$app->language = 'th';

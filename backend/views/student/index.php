@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="box-body">
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
         <?php  Pjax::begin(['id'=>'student-grid-pjax']);?>
         <?= \kartik\grid\GridView::widget([
@@ -38,9 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
 	    [
-		'class' => 'yii\grid\SerialColumn',
-		'headerOptions' => ['style'=>'text-align: center;'],
-		'contentOptions' => ['style'=>'width:60px;text-align: center;'],
+            'class' => 'yii\grid\SerialColumn',
+            'headerOptions' => ['style'=>'text-align: center;'],
+            'contentOptions' => ['style'=>'width:60px;text-align: center;'],
+            'header'=>'ลำดับ'
 	    ],
 
             'id',
@@ -127,6 +128,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ]); ?>
 <script>
 // JS script
+
+$( "td:eq(0)" ).addClass('iconTb text-center');
+setTimeout(function(){
+    $('.iconTb').html("<i title='ค้นหา' class='glyphicon glyphicon-search'></i>");
+});
+
 $('#modal-addbtn-student').on('click', function() {
     modalStudent($(this).attr('data-url'));
 });
