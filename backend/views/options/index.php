@@ -16,16 +16,16 @@ $this->title = Yii::t('appmenu', 'Setting Config');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="box box-primary">
-    <div class="box-header">
+<div class="panel panel-primary">
+    <div class="panel-heading">
          <i class="fa fa-wrench"></i> <?=  Html::encode($this->title) ?> 
-         <div class="pull-right">
+         <div class="pull-right" style="margin-top:-5px;">
              <?= Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['options/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-options']). ' ' .
 		      Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['options/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-options', 'disabled'=>false]) 
              ?>
          </div>
     </div>
-<div class="box-body">    
+<div class="panel-body">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php  Pjax::begin(['id'=>'options-grid-pjax']);?>
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons'=>[
                     'update'=>function($url, $model){
                         return Html::a('<span class="fa fa-edit"></span> '.Yii::t('app', 'Edit'), 
-                                    yii\helpers\Url::to(['options/update/'.$model->id]), [
+                                    yii\helpers\Url::to(['options/update?id='.$model->id]), [
                                     'title' => Yii::t('app', 'Edit'),
                                     'class' => 'btn btn-primary btn-xs',
                                     'data-action'=>'update',
@@ -67,10 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'delete' => function ($url, $model) {                         
                         return Html::a('<span class="fa fa-trash"></span> '.Yii::t('app', 'Delete'), 
-                                yii\helpers\Url::to(['options/delete/'.$model->id]), [
+                                yii\helpers\Url::to(['options/delete?id='.$model->id]), [
                                 'title' => Yii::t('app', 'Delete'),
                                 'class' => 'btn btn-danger btn-xs',
-                                'data-confirm' => Yii::t('chanpan', 'Are you sure you want to delete this item?'),
+                                'data-confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                                 'data-method' => 'post',
                                 'data-action' => 'delete',
                                 'data-pjax'=>0
@@ -129,7 +129,7 @@ $('#options-grid-pjax').on('click', 'tbody tr td a', function() {
     if(action === 'update' || action === 'view') {
 	modalOption(url);
     } else if(action === 'delete') {
-	yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete this item?')?>', function() {
+	yii.confirm('<?= Yii::t('app', 'Are you sure you want to delete this item?')?>', function() {
 	    $.post(
 		url
 	    ).done(function(result) {

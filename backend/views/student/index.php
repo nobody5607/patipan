@@ -62,13 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => [ "1"=>"ชาย", "2"=>"หญิง" ]
             ],
-            // 'address:ntext',
-            // 'tel',
-            // 'create_by',
-            // 'create_date',
-            // 'update_by',
-            // 'update_date',
-            // 'rstat',
             'start_score',
             'end_score',
 
@@ -87,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     },
                     'update'=>function($url, $model){
-                        return Html::a('<span class="fa fa-edit"></span> '.Yii::t('app', 'แก้ไข'), 
+                        return Html::a('<span class="fa fa-pencil"></span> '.Yii::t('app', 'แก้ไข'),
                                     yii\helpers\Url::to(['student/update?id='.$model->id]), [
                                     'title' => Yii::t('app', 'Edit'),
                                     'class' => 'btn btn-primary btn-xs',

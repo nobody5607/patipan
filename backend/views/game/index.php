@@ -30,8 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
             <?= GridView::widget([
                 'id' => 'game-grid',
-                /*	'panelBtn' => Html::button(SDHtml::getBtnAdd(), ['data-url'=>Url::to(['game/create']), 'class' => 'btn btn-success btn-sm', 'id'=>'modal-addbtn-game']). ' ' .
-                              Html::button(SDHtml::getBtnDelete(), ['data-url'=>Url::to(['game/deletes']), 'class' => 'btn btn-danger btn-sm', 'id'=>'modal-delbtn-game', 'disabled'=>true]),*/
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
@@ -56,19 +54,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             return isset($model->answer) ? $model->answer : '';
                         },
                     ],
-                    //'create_by',
-                    // 'create_date',
-                    // 'update_by',
-                    // 'update_date',
-                    // 'type',
-
                     [
                         'class' => 'appxq\sdii\widgets\ActionColumn',
                         'contentOptions' => ['style' => 'width:180px;text-align: center;'],
                         'template' => '{update} {delete}',
                         'buttons' => [
                             'update' => function ($url, $model) {
-                                return Html::a('<span class="fa fa-edit"></span> ' . Yii::t('app', 'แก้ไข'),
+                                return Html::a('<span class="fa fa-pencil"></span> ' . Yii::t('app', 'แก้ไข'),
                                     yii\helpers\Url::to(['update?id=' . $model->id]), [
                                         'title' => Yii::t('app', 'แก้ไข'),
                                         'class' => 'btn btn-primary btn-xs',

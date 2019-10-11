@@ -24,7 +24,7 @@ use appxq\sdii\helpers\SDHtml;
                 echo $form->field($model, 'image')->widget(\trntv\filekit\widget\Upload::classname(), [
                     'url' => ['/core/file-storage/avatar-upload'],
                     'id' => 'upload'
-                ]);
+                ])->label(false);
                 ?>
             </div>
             <div class="col-md-9">

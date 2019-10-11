@@ -58,12 +58,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             return isset($model->section) ? $model->section : "";
                         }
                     ],
-                    //'create_by',
-                    // 'create_date',
-                    // 'updat_by',
-                    // 'update_date',
-                    // 'rstat',
-
                     [
                         'class' => 'appxq\sdii\widgets\ActionColumn',
                         'contentOptions' => ['style' => 'width:180px;text-align: center;'],
@@ -79,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ]);
                             },
                             'update' => function ($url, $model) {
-                                return Html::a('<span class="fa fa-edit"></span> ' . Yii::t('app', 'แก้ไข'),
+                                return Html::a('<span class="fa fa-pencil"></span> ' . Yii::t('app', 'แก้ไข'),
                                     yii\helpers\Url::to(['lessons/update?id=' . $model->id]), [
                                         'title' => Yii::t('app', 'Edit'),
                                         'class' => 'btn btn-primary btn-xs',
