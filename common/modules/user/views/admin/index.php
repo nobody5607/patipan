@@ -43,19 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['style' => 'width:60px;text-align: center;'],
                 ],
                 [
-                    'header' => Yii::t('_user', 'Admin'),
-                    'value' => function ($model){
-                        $data = \common\modules\user\classes\CNAuth::canAdmin($model->id);
-                        if (!empty($data)) {
-                            return '<i style="color:green;" class="glyphicon glyphicon-ok"></i>';
-                        }
-                        return '<i style="color:red;" class="glyphicon glyphicon-remove-sign"></i>';
-                    },
-                    'format' => 'raw',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                    'contentOptions' => ['style' => 'width:90px;text-align: center;'],
-                ],
-                [
                     'contentOptions' => ['style' => 'width:150px;text-align: left;'],
                     'attribute' => 'username',
                     'value' => 'username',
