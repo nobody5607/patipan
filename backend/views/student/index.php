@@ -36,18 +36,22 @@ $this->params['breadcrumbs'][] = $this->title;
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
         'columns' => [
+            [
+                    'contentOptions' => ['style'=>'wdith:50px;text-align:center'],
+                    'attribute' => 'number',
+                    'value' => function($model){
+                        return isset($model->number)?$model->number:'';
+                    }
+            ],
+            [
 
-	    [
-            'class' => 'yii\grid\SerialColumn',
-            'headerOptions' => ['style'=>'text-align: center;'],
-            'contentOptions' => ['style'=>'width:60px;text-align: center;'],
-            'header'=>'ลำดับ'
-	    ],
-
-            'id',
+                'contentOptions' => ['style'=>'wdith:100px;text-align:center'],
+                'attribute' => 'id',
+                'value' => function($model){
+                    return isset($model->id)?$model->id:'';
+                }
+            ],
             'name',
-            'number',
-            'room',
             [
                 'format'=>'raw',
                 'attribute'=>'sex',
@@ -62,8 +66,67 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => [ "1"=>"ชาย", "2"=>"หญิง" ]
             ],
-            'start_score',
-            'end_score',
+            [
+
+                'contentOptions' => ['style'=>'wdith:100px;text-align:center'],
+                'label' => 'คะแนนเกมการบวก',
+                'value' => function($model){
+                    $player = \backend\models\Players::find()
+                        ->where('type=1 AND user_id=:id',[
+                                ':id' => $model->id
+                        ])->orderBy(['scores'=>SORT_DESC])->one();
+                    if($player){
+                        return $player['scores'];
+                    }
+                    return 0;
+                }
+            ],
+            [
+
+                'contentOptions' => ['style'=>'wdith:100px;text-align:center'],
+                'label' => 'คะแนนเกมการลบ',
+                'value' => function($model){
+                    $player = \backend\models\Players::find()
+                        ->where('type=2 AND user_id=:id',[
+                            ':id' => $model->id
+                        ])->orderBy(['scores'=>SORT_DESC])->one();
+                    if($player){
+                        return $player['scores'];
+                    }
+                    return 0;
+                }
+            ],
+            [
+
+                'contentOptions' => ['style'=>'wdith:100px;text-align:center'],
+                'label' => 'คะแนนเกมการคูณ',
+                'value' => function($model){
+                    $player = \backend\models\Players::find()
+                        ->where('type=3 AND user_id=:id',[
+                            ':id' => $model->id
+                        ])->orderBy(['scores'=>SORT_DESC])->one();
+                    if($player){
+                        return $player['scores'];
+                    }
+                    return 0;
+                }
+            ],
+            [
+
+                'contentOptions' => ['style'=>'wdith:100px;text-align:center'],
+                'label' => 'คะแนนเกมการหาร',
+                'value' => function($model){
+                    $player = \backend\models\Players::find()
+                        ->where('type=4 AND user_id=:id',[
+                            ':id' => $model->id
+                        ])->orderBy(['scores'=>SORT_DESC])->one();
+                    if($player){
+                        return $player['scores'];
+                    }
+                    return 0;
+                }
+            ],
+
 
 	    [
 		'class' => 'appxq\sdii\widgets\ActionColumn',

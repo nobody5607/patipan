@@ -54,7 +54,7 @@ class Student extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'รหัสประจำตัวนักเรียน'),
+            'id' => Yii::t('app', 'เลขประจำตัว'),
             'name' => Yii::t('app', 'ชื่อนักเรียน'),
             'number' => Yii::t('app', 'เลขที่'),
             'room' => Yii::t('app', 'ห้อง'),

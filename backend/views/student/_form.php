@@ -44,7 +44,6 @@ use appxq\sdii\helpers\SDHtml;
 
         <div class="row">
             <div class='col-md-4 col-sm-4 col-xs-4'><?= $form->field($model, 'number')->textInput() ?></div>
-            <div class='col-md-4 col-sm-4 col-xs-4'><?= $form->field($model, 'room')->textInput(['maxlength' => true]) ?></div>
             <div class='col-md-4 col-sm-4 col-xs-4'>
                 <?php
                 $item = ['1' => 'ชาย', '2' => 'หญิง'];
