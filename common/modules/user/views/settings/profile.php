@@ -58,19 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ])
                 ?>
 
-                <?= $form->field($model, 'website') ?>
 
-                <?= $form->field($model, 'location') ?>
-
-                <?= $form
-                    ->field($model, 'timezone')
-                    ->dropDownList(
-                        ArrayHelper::map(
-                            Timezone::getAll(),
-                            'timezone',
-                            'name'
-                        )
-                    ); ?>                 
                 <?=
                     $form->field($model, 'bio')->widget(\yii\widgets\MaskedInput::className(), [
                         'mask' => '99/99/9999',
