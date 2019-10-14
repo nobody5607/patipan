@@ -96,7 +96,8 @@
             $("#btnStartgame").show();
             myStopFunction();
 
-            let url = '<?= \yii\helpers\Url::to(["/game/list-score?type={$type}&user_id={$user_id}"])?>';
+            let url2 = '<?= \yii\helpers\Url::to(["/game/list-score?type={$type}&user_id={$user_id}"])?>';
+            location.href = url2;
             return false;
         }
         num ++;
