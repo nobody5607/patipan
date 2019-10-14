@@ -261,9 +261,8 @@ class GameController extends Controller
         return Json::encode(['score'=>$score,'total'=>$player->scores]);
     }
     
-    public function actionGameOver() {
-//        $playerid   = \Yii::$app->request->post('playerid');
-//        $player = \backend\models\Players::findOne($playerid);
+    public function actionAbout() {
+        return $this->renderAjax('about');
     }
     /**
      * Finds the Game model based on its primary key value.
