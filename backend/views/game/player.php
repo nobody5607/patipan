@@ -122,6 +122,8 @@
       time-=1;
       if(time <= -1){
           myStopFunction();
+          let url2 = '<?= \yii\helpers\Url::to(["/game/list-score?type={$type}&user_id={$user_id}"])?>';
+          location.href = url2;
       }
     } 
     function myStopFunction() {
