@@ -95,6 +95,8 @@
             hideInput();
             $("#btnStartgame").show();
             myStopFunction();
+
+            let url = '<?= \yii\helpers\Url::to(["/game/list-score?type={$gameType}&user_id={$user_id}"])?>';
             return false;
         }
         num ++;

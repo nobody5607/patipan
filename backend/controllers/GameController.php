@@ -190,18 +190,20 @@ class GameController extends Controller
         if(!$model->save()){
             \appxq\sdii\utils\VarDumper::dump($model->errors);
         }
-        return $this->redirect(['/game/player?id='.$model->id]);
+        return $this->redirect(['/game/player?id='.$model->id.'&user_id='.$user_id]);
     }
 
     public function actionPlayer() {
-         $id = Yii::$app->request->get('id'); 
+         $id = Yii::$app->request->get('id');
+         $user_id = Yii::$app->request->get('user_id','');
          $player = \backend\models\Players::findOne($id);
          $gameType = \backend\models\GameType::findOne($player['type']);
          $ids = explode(',', $player['games']);  
          //\appxq\sdii\utils\VarDumper::dump($id); 
          return $this->renderAjax('player',[
             'player'=>$player,
-            'gameType'=>$gameType 
+            'gameType'=>$gameType,
+            'user_id'=>$user_id
          ]);
     }
     public function actionLoadPlayer() {
