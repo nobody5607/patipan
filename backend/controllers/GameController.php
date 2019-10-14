@@ -203,7 +203,8 @@ class GameController extends Controller
          return $this->renderAjax('player',[
             'player'=>$player,
             'gameType'=>$gameType,
-            'user_id'=>$user_id
+            'user_id'=>$user_id,
+             'type'=>$player['type']
          ]);
     }
     public function actionLoadPlayer() {
@@ -230,7 +231,8 @@ class GameController extends Controller
             ->orderBy(['scores'=>SORT_DESC])
             ->all();
         return $this->renderAjax('list-score',[
-           'player' => $player
+           'player' => $player,
+            'user_id'=>$user_id
         ]);
     }
     public function actionCheckAnswer() {
