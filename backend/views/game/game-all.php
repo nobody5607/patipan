@@ -22,7 +22,7 @@
 
         <?php foreach ($types as $k => $v): ?>
             <div style="margin-bottom: 15px;">
-                <a style="font-size:20pt;font-weight: bold;" href="<?= yii\helpers\Url::to(["/game/load-game?type={$v['id']}"]) ?>"
+                <a style="font-size:20pt;font-weight: bold;" href="<?= yii\helpers\Url::to(["/game/load-game?type={$v['id']}&user_id={$user_id}"]) ?>"
                    class="">
                     <?php
                         $image = \yii\helpers\Url::to('@web/img/').$v['image']

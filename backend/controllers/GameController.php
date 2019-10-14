@@ -158,14 +158,17 @@ class GameController extends Controller
 	}
     }
     
-    public function actionGameAll() { 
+    public function actionGameAll() {
+        $user_id = Yii::$app->request->get('user_id','');
         $gameType = \backend\models\GameType::find()->all(); 
         return $this->renderAjax('game-all',[
-            'types'=>$gameType
+            'types'=>$gameType,
+            'user_id'=>$user_id
         ]);
     }
     public function actionLoadGame(){
         $type = Yii::$app->request->get('type');
+        $user_id = Yii::$app->request->get('user_id','');
         $gameType = \backend\models\GameType::findOne($type);
         $games = Game::find()
                     ->where(['type' => $type])
@@ -183,7 +186,7 @@ class GameController extends Controller
         $model->type = $type;
         $model->times= 60;
         $model->index= 0;
-        $model->user_id = \common\modules\user\classes\CNUserFunc::getUserId();
+        $model->user_id = $user_id;
         if(!$model->save()){
             \appxq\sdii\utils\VarDumper::dump($model->errors);
         }
@@ -216,6 +219,17 @@ class GameController extends Controller
         if($player){
             return $player['scores'];
         }
+    }
+    public function actionListScore() {
+        $type = Yii::$app->request->get('type');
+        $user_id = Yii::$app->request->get('user_id');
+        $player = \backend\models\Players::find()
+            ->where()
+            ->orderBy(['scores'=>SORT_DESC])
+            ->all();
+        return $this->renderAjax('list-score',[
+           'player' => $player
+        ]);
     }
     public function actionCheckAnswer() {
         header('Access-Control-Allow-Origin: *');

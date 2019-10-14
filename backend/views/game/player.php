@@ -194,7 +194,7 @@
 
 
 <audio id="Correct">
-    <source src="<?= \yii\helpers\Url::to('@web/mp3/ถูก.mp3') ?>" type="audio/mpeg">
+    <source src="<?= \yii\helpers\Url::to('@web/mp3/yes.mp3') ?>" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 <audio id="Wrong">
