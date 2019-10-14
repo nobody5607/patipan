@@ -184,7 +184,7 @@ class GameController extends Controller
         $model->games = $ids;
         $model->scores = 0;
         $model->type = $type;
-        $model->times= 60;
+        $model->times= isset(\Yii::$app->params['times'])?\Yii::$app->params['times']:60;
         $model->index= 0;
         $model->user_id = $user_id;
         if(!$model->save()){
