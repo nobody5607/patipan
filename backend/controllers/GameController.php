@@ -227,7 +227,7 @@ class GameController extends Controller
         $type = Yii::$app->request->get('type');
         $user_id = Yii::$app->request->get('user_id');
         $player = \backend\models\Players::find()
-            ->where()
+            ->where(['type'=>$type,'user_id'=>$user_id])
             ->orderBy(['scores'=>SORT_DESC])
             ->all();
         return $this->renderAjax('list-score',[
