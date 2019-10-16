@@ -82,14 +82,16 @@ use appxq\sdii\helpers\SDHtml;
                 $form.serialize()
                 ).done(function (result) {
             if (result.status == 'success') {
-<?= SDNoty::show('result.message', 'result.status') ?>
+                <?= SDNoty::show('result.message', 'result.status') ?>
                 $(document).find('#modal-game').modal('hide');
-                location.reload();
+                setTimeout(function(){
+                    location.reload();
+                },1000);
             } else {
-<?= SDNoty::show('result.message', 'result.status') ?>
+                <?= SDNoty::show('result.message', 'result.status') ?>
             }
         }).fail(function () {
-<?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"') ?>
+                <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"') ?>
             console.log('server error');
         });
         return false;

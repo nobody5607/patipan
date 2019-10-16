@@ -82,7 +82,9 @@ use appxq\sdii\helpers\SDHtml;
             if (result.status == 'success') {
                 <?= SDNoty::show('result.message', 'result.status')?>
                 $(document).find('#modal-student').modal('hide');
-                location.reload();
+                setTimeout(function(){
+                    location.reload();
+                },1000);
             } else {
                 <?= SDNoty::show('result.message', 'result.status')?>
             }

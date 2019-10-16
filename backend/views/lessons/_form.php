@@ -68,7 +68,9 @@ $('form#<?= $model->formName()?>').on('beforeSubmit', function(e) {
         if(result.status == 'success') {
             <?= SDNoty::show('result.message', 'result.status')?>
             $(document).find('#modal-lessons').modal('hide');
-            location.reload();
+            setTimeout(function(){
+                    location.reload();
+                },1000);
         } else {
             <?= SDNoty::show('result.message', 'result.status')?>
         } 

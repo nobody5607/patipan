@@ -84,14 +84,9 @@ $('form#<?= $model->formName()?>').on('beforeSubmit', function(e) {
     ).done(function(result) {
         if(result.status == 'success') {
             <?= SDNoty::show('result.message', 'result.status')?>
-            if(result.action == 'create') {
-                //$(\$form).trigger('reset');
-                $(document).find('#modal-test').modal('hide');
-                $.pjax.reload({container:'#test-grid-pjax'});
-            } else if(result.action == 'update') {
-                $(document).find('#modal-test').modal('hide');
-                $.pjax.reload({container:'#test-grid-pjax'});
-            }
+            setTimeout(function(){
+                    location.reload();
+                },1000);
         } else {
             <?= SDNoty::show('result.message', 'result.status')?>
         } 
