@@ -35,8 +35,7 @@ class StudentController extends Controller
      */
     public function actionIndex()
     {
-
-        
+       
         $searchModel = new StudentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
