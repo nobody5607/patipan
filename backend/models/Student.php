@@ -43,7 +43,7 @@ class Student extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 200],
             [['room'], 'string', 'max' => 10],
             [['id'], 'string', 'max' => 20],
-            [['id'], 'unique'],
+            [['id','number'], 'unique'],
             ['tel', 'string', 'min' => 10, 'max' => 10,'message'=>'เบอร์โทรศัพทต้องมี 10 ตัว']
         ];
     }
@@ -66,8 +66,6 @@ class Student extends \yii\db\ActiveRecord
             'update_by' => Yii::t('app', 'แก้ไขโดย'),
             'update_date' => Yii::t('app', 'แก้ไขเมื่อ'),
             'rstat' => Yii::t('app', 'สถานะ'),
-            'start_score'=>'คะแนนสอบก่อนเรียน',
-            'end_score'=>'คะแนนสอบหลังเรียน',
             
         ];
     }
