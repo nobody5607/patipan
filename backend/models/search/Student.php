@@ -41,7 +41,7 @@ class Student extends StudentModel
      */
     public function search($params)
     {
-        $query = StudentModel::find()->where('rstat not in(0,3)');
+        $query = StudentModel::find()->where('rstat not in(0,3)')->orderBy(['number'=>SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
