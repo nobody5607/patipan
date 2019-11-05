@@ -72,6 +72,7 @@ class StudentController extends Controller
      */
     public function actionValidate(){
         $model = new Student();
+        //VarDumper::dump($model->scenario);
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             \Yii::$app->response->format = Response::FORMAT_JSON;
             if(ActiveForm::validate($model) != null){

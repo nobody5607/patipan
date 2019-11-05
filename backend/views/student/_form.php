@@ -8,12 +8,18 @@ use appxq\sdii\helpers\SDHtml;
 ?>
 
 <div class="student-form">
-
+<?php if($model->isNewRecord):?>
     <?php $form = ActiveForm::begin([
         'id' => $model->formName(),
         'enableAjaxValidation' => true,
         'validationUrl' => \Yii::$app->urlManager->createUrl('/student/validate')
     ]); ?>
+    <?php else:?>
+    <?php $form = ActiveForm::begin([
+            'id' => $model->formName(),
+            'enableAjaxValidation' => true,
+        ]); ?>
+    <?php endif; ?>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
