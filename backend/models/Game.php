@@ -49,13 +49,13 @@ class Game extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'number' => Yii::t('app', 'ลำดับ'),
-            'question' => Yii::t('app', 'ชื่อเกมส์'),
+            'question' => Yii::t('app', 'ชื่อเกม'),
             'answer' => Yii::t('app', 'เฉลย'),
             'create_by' => Yii::t('app', 'สร้างโดย'),
             'create_date' => Yii::t('app', 'สร้างเมื่อ'),
             'update_by' => Yii::t('app', 'แก้ไขโดย'),
             'update_date' => Yii::t('app', 'แก้ไขเมื่อ'),
-            'type'=>'ประเภทเกมส์'
+            'type'=>'ประเภทเกม'
         ];
     }
 }

@@ -36,7 +36,7 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id','password','name','sex','tel'], 'required'],
+            [['id','password','name','sex','tel','number'], 'required'],
             [['number', 'sex', 'create_by', 'update_by', 'rstat'], 'integer'],
             [['address'], 'string'],
             [['create_date', 'update_date','token','start_score','end_score','image','address'], 'safe'],

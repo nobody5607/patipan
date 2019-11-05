@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use appxq\sdii\utils\VarDumper;
 use Yii;
 use backend\models\Student;
 use backend\models\search\Student as StudentSearch;
+use yii\bootstrap\ActiveForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -68,6 +70,16 @@ class StudentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    public function actionValidate(){
+        $model = new Student();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            if(ActiveForm::validate($model) != null){
+                return ActiveForm::validate($model);
+            }
+
+        }
+    }
     public function actionCreate()
     {
 	if (Yii::$app->getRequest()->isAjax) {
@@ -76,6 +88,8 @@ class StudentController extends Controller
             $model->create_date = date('Y-m-d H:i:s');
             $model->token = \Yii::$app->security->generateRandomString(20);
             $model->rstat = 1;
+
+
 	    if ($model->load(Yii::$app->request->post())) {
                 $post = \Yii::$app->request->post('Student');
                 if($post['image'] != ''){

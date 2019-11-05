@@ -12,7 +12,7 @@ use appxq\sdii\helpers\SDHtml;
 /* @var $searchModel backend\models\search\Game */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'จัดการเกมส์');
+$this->title = Yii::t('app', 'จัดการเกม');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-heading">
             <label><i class="fa fa-gamepad"></i> <?= Html::encode($this->title) ?></label>
             <div class="pull-right">
-                <?= Html::button(SDHtml::getBtnAdd() . 'เพิ่มเกมส์', [
+                <?= Html::button(SDHtml::getBtnAdd() . 'เพิ่มเกม', [
                     'data-url' => Url::to(['game/create']),
                     'class' => 'btn btn-success btn-sm', 'id' => 'modal-addbtn-game']);
                 ?>
@@ -113,17 +113,33 @@ $this->params['breadcrumbs'][] = $this->title;
             if (action === 'update' || action === 'view') {
                 modalGame(url);
             } else if (action === 'delete') {
-                yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete this item?')?>', function () {
-                    $.post(
-                        url
-                    ).done(function (result) {
-                        <?= SDNoty::show('result.message', 'result.status')?>
-                        location.reload();
-                    }).fail(function () {
-                        <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
-                        console.log('server error');
-                    });
+                bootbox.confirm({
+                    message: '<?= Yii::t('app', 'Are you sure you want to delete this item?')?>',
+                    buttons: {
+                        confirm: {
+                            label: 'ใช่',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'ไม่ใช่',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result === true){
+                            $.post(
+                                url
+                            ).done(function (result) {
+                                <?= SDNoty::show('result.message', 'result.status')?>
+                                location.reload();
+                            }).fail(function () {
+                                <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
+                                console.log('server error');
+                            });
+                        }
+                    }
                 });
+
             }
             return false;
         });

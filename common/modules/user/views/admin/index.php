@@ -196,21 +196,37 @@ $this->params['breadcrumbs'][] = $this->title;
             window.open(url, '_blank');
             return false;
         } else if (action === 'delete') {
-            yii.confirm('<?= Yii::t('chanpan', 'Are you sure you want to delete this item?') ?>', function () {
-                $.post(
-                        url
-                        ).done(function (result) {
-                    if (result.status == 'success') {
-<?= SDNoty::show('result.message', 'result.status') ?>
-                        $.pjax.reload({container: '#user-grid-pjax'});
-                    } else {
-<?= SDNoty::show('result.message', 'result.status') ?>
+            bootbox.confirm({
+                message: '<?= Yii::t('app', 'คุณแน่ใจหรือว่าต้องการลบรายการนี้?')?>',
+                buttons: {
+                    confirm: {
+                        label: 'ใช่',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'ไม่ใช่',
+                        className: 'btn-danger'
                     }
-                }).fail(function () {
-<?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"') ?>
-                    console.log('server error');
-                });
+                },
+                callback: function (result) {
+                    if(result === true){
+                        $.post(
+                            url
+                        ).done(function (result) {
+                            if (result.status == 'success') {
+                                <?= SDNoty::show('result.message', 'result.status') ?>
+                                $.pjax.reload({container: '#user-grid-pjax'});
+                            } else {
+                                <?= SDNoty::show('result.message', 'result.status') ?>
+                            }
+                        }).fail(function () {
+                            <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"') ?>
+                            console.log('server error');
+                        });
+                    }
+                }
             });
+
         }
         return false;
     });

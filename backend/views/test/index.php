@@ -12,7 +12,7 @@ use appxq\sdii\helpers\SDHtml;
 /* @var $searchModel backend\models\search\Test */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'จัดการเกมส์';
+$this->title = 'จัดการเกม';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

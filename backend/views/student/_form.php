@@ -11,6 +11,8 @@ use appxq\sdii\helpers\SDHtml;
 
     <?php $form = ActiveForm::begin([
         'id' => $model->formName(),
+        'enableAjaxValidation' => true,
+        'validationUrl' => \Yii::$app->urlManager->createUrl('/student/validate')
     ]); ?>
 
     <div class="modal-header">

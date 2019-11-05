@@ -131,21 +131,37 @@ $this->params['breadcrumbs'][] = $this->title;
             if (action === 'update' || action === 'view') {
                 modalLesson(url);
             } else if (action === 'delete') {
-                yii.confirm('<?= Yii::t('app', 'Are you sure you want to delete this item?')?>', function () {
-                    $.post(
-                        url
-                    ).done(function (result) {
-                        if (result.status == 'success') {
-                            <?= SDNoty::show('result.message', 'result.status')?>
-                            $.pjax.reload({container: '#lessons-grid-pjax'});
-                        } else {
-                            <?= SDNoty::show('result.message', 'result.status')?>
+                bootbox.confirm({
+                    message: '<?= Yii::t('app', 'Are you sure you want to delete this item?')?>',
+                    buttons: {
+                        confirm: {
+                            label: 'ใช่',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'ไม่ใช่',
+                            className: 'btn-danger'
                         }
-                    }).fail(function () {
-                        <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
-                        console.log('server error');
-                    });
+                    },
+                    callback: function (result) {
+                        if(result === true){
+                            $.post(
+                                url
+                            ).done(function (result) {
+                                if (result.status == 'success') {
+                                    <?= SDNoty::show('result.message', 'result.status')?>
+                                    $.pjax.reload({container: '#lessons-grid-pjax'});
+                                } else {
+                                    <?= SDNoty::show('result.message', 'result.status')?>
+                                }
+                            }).fail(function () {
+                                <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
+                                console.log('server error');
+                            });
+                        }
+                    }
                 });
+
             }
             return false;
         });

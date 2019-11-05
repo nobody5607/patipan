@@ -41,7 +41,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'ทดสอบเกมส์', 'url' => ['/game/game-all']]
+        ['label' => 'ทดสอบเกม', 'url' => ['/game/game-all']]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
@@ -58,7 +58,7 @@ AppAsset::register($this);
         ];
         $menuItems[] = ['label' => 'จัดการบทเรียน', 'icon' => 'book', 'url' => ['/lessons/index'], 'visible' => !Yii::$app->user->isGuest];
         $menuItems[] = [
-            'label' => 'จัดการเกมส์',
+            'label' => 'จัดการเกม',
             'icon' => 'users', 'url' => ['/game/index'],
             'visible' => (\Yii::$app->user->can('admin') || \Yii::$app->user->can('teacher')) ? true : false
         ];

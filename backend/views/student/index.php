@@ -200,17 +200,35 @@ $('.kv-grid-table').on('click', 'tbody tr td a', function() {
     if (action === 'update' || action === 'view') {
         modalStudent(url);
     } else if (action === 'delete') {
-        yii.confirm('<?= Yii::t('app', 'Are you sure you want to delete this item?')?>', function() {
-            $.post(
-                url
-            ).done(function(result) {
-                <?= SDNoty::show('result.message', 'result.status')?>
-                location.reload();
-            }).fail(function() {
-                <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
-                console.log('server error');
-            });
+        bootbox.confirm({
+            message: '<?= Yii::t('app', 'Are you sure you want to delete this item?')?>',
+            buttons: {
+                confirm: {
+                    label: 'ใช่',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'ไม่ใช่',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+               if(result === true){
+                   $.post(
+                       url
+                   ).done(function(result) {
+                       <?= SDNoty::show('result.message', 'result.status')?>
+                       setTimeout(function () {
+                           location.reload();
+                       },1500);
+                   }).fail(function() {
+                       <?= SDNoty::show("'" . SDHtml::getMsgError() . "Server Error'", '"error"')?>
+                       console.log('server error');
+                   });
+               }
+            }
         });
+
     }
     return false;
 });

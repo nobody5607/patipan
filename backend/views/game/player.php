@@ -1,5 +1,10 @@
 <?php 
-    $this->title = 'คุณกำลังเล่นเกมส์ '.$gameType['name'];
+    $this->title = 'คุณกำลังเล่นเกม '.$gameType['name'];
+    $count = 10;
+    if(isset($player['games'])){
+       $count = count(explode(',',$player['games']));
+    }
+
 ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <div class="row">
@@ -16,12 +21,12 @@
         </audio>
     </div>
     <div class="col-md-6 col-md-offset-3">
-        <h2 class="text-center">คุณกำลังเล่นเกมส์ <?= $gameType['name']; ?>  </h2>
+        <h2 class="text-center">คุณกำลังเล่นเกม <?= $gameType['name']; ?>  </h2>
 
 
 
         <h3 class="text-center times-gay" id="blog-time">เวลา: <label id="times"><?= isset($player['times'])?$player['times']:''; ?></label> วินาที</h3>
-        <h3 class="text-center total-score">คะแนน: <label id="score"><?= $player['scores']; ?></label></h3>
+        <h3 class="text-center total-score">คะแนน: <label id="score"><?= $player['scores']; ?>/<?= $count?></label></h3>
         <div id="preview-game"></div>
         <div>
             <input id="answer" data-id='<?= $player['id']; ?>' type="hidden">
@@ -30,7 +35,7 @@
             <button class="btn btn-lg btn-block btn-warning" id="btnSendAnswer">ตอบ</button>
         </div>
         <br>
-        <a class="btn btn-success btn-lg btn-block" id="btnStartgame" href="<?= yii\helpers\Url::to(['/game/game-all'])?>">เริ่มเกมส์ใหม่</a>
+        <a class="btn btn-success btn-lg btn-block" id="btnStartgame" href="<?= yii\helpers\Url::to(['/game/game-all'])?>">เริ่มเกมใหม่</a>
     </div>
 </div>
 
@@ -59,7 +64,7 @@
     function getScore(id){
         let url = '<?= yii\helpers\Url::to(['/game/get-score'])?>';
         $.get(url,{id:id}, function(res){
-            $("#score").html(res);
+            $("#score").html(res+'/'+<?= $count?>);
         });
     }
     function loadPlayer(id){
@@ -75,10 +80,15 @@
         let url = '<?= yii\helpers\Url::to(['/game/check-answer'])?>';
         let gameid = $("#answer").val();
         let value = $("#answer2").val();
+
+        if(value == '' || value === undefined){
+            alert('กรุณาใส่คำตอบของคุณ');
+            return  false;
+        }
         $.get(url,{playerid:playerId,gameid:gameid,value:value,num:num+1},function(res){
             res = JSON.parse(res);
             if(res != null){
-                $("#score").html(res['total']);
+                $("#score").html(res['total']+'/'+<?= $count?>);
                 id = games[num];
                 $('#answer').val(id);
                 loadPlayer(id);
