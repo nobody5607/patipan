@@ -14,6 +14,7 @@ use common\widgets\Alert;
 \cpn\chanpan\assets\bootbox\BootBoxAsset::register($this);
 \cpn\chanpan\assets\notify\NotifyAsset::register($this);
 
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

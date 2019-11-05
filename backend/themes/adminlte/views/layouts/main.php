@@ -5,7 +5,8 @@ use yii\helpers\Html;
 \cpn\chanpan\assets\notify\NotifyAsset::register($this);
 \cpn\chanpan\assets\jrating\JRatingAsset::register($this);
 \cpn\chanpan\assets\mdi\MDIAsset::register($this);  
-cpn\chanpan\assets\jquery_scroll\JqueryScrollAsset::register($this); 
+cpn\chanpan\assets\jquery_scroll\JqueryScrollAsset::register($this);
+
 
 
 ?>

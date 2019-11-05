@@ -30,6 +30,7 @@
         <div id="preview-game"></div>
         <div>
             <input id="answer" data-id='<?= $player['id']; ?>' type="hidden">
+            <label id="val-request" style="display: block;margin-bottom: 2px;"></label>
             <input type="number" class="form-control input-lg" id="answer2" placeholder="ช่องตอบคำตอบ">
             <br>
             <button class="btn btn-lg btn-block btn-warning" id="btnSendAnswer">ตอบ</button>
@@ -75,6 +76,8 @@
     } 
     $('#btnSendAnswer').on('click', function(){
         showInput();
+        $("#val-request").html('');
+        $('#val-request').removeClass('alert alert-danger');
         console.log('games =>', games.length);
         console.log('num => ',num);
         let url = '<?= yii\helpers\Url::to(['/game/check-answer'])?>';
@@ -82,7 +85,9 @@
         let value = $("#answer2").val();
 
         if(value == '' || value === undefined){
-            alert('กรุณาใส่คำตอบของคุณ');
+            //alert('กรุณาใส่คำตอบของคุณ');
+             $("#val-request").html('กรุณาใส่คำตอบของคุณ');
+            $('#val-request').addClass('alert alert-danger');
             return  false;
         }
         $.get(url,{playerid:playerId,gameid:gameid,value:value,num:num+1},function(res){
