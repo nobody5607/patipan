@@ -59,7 +59,9 @@ use appxq\sdii\helpers\SDHtml;
                 <?= $form->field($model, 'sex')->dropDownList($item, ['prompt' => '--เลือกเพศ--']) ?>
             </div>
         </div>
-        <?= $form->field($model, 'tel')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'tel')->widget(\yii\widgets\MaskedInput::classname(),[
+            'mask' => '9999999999'
+        ]);?>
     </div>
 
     <div class="modal-footer">
