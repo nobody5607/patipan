@@ -27,6 +27,7 @@
 
         <h3 class="text-center times-gay" id="blog-time">เวลา: <label id="times"><?= isset($player['times'])?$player['times']:''; ?></label> วินาที</h3>
         <h3 class="text-center total-score">คะแนน: <label id="score"><?= $player['scores']; ?>/<?= $count?></label></h3>
+        <h3 class="text-center total-score">มีทั้งหมด: <label id="score"><span id="numberPlayer">1</span>/<?= $count?></label></h3>
         <div id="preview-game"></div>
         <div>
             <input id="answer" data-id='<?= $player['id']; ?>' type="hidden">
@@ -73,7 +74,8 @@
         $.get(url,{id:id}, function(res){
             $("#preview-game").html(res);
         });
-    } 
+    }
+    var numberPlayer = 1;
     $('#btnSendAnswer').on('click', function(){
         showInput();
         $("#val-request").html('');
@@ -90,7 +92,11 @@
             $('#val-request').addClass('alert alert-danger');
             return  false;
         }
+        numberPlayer++;
+        $('#numberPlayer').html(numberPlayer);
+
         $.get(url,{playerid:playerId,gameid:gameid,value:value,num:num+1},function(res){
+
             res = JSON.parse(res);
             if(res != null){
                 $("#score").html(res['total']+'/'+<?= $count?>);
