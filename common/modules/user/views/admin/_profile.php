@@ -46,10 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-6 col-md-offset-3">
             <div class="row">
                 <div class="col-md-8">
-                    <?= Html::submitButton(Yii::t('_user', 'Save'), ['class' => 'btn btn-primary btn-block']) ?> 
+                    <?= Html::submitButton(Yii::t('_user', 'แก้ไข'), ['class' => 'btn btn-primary btn-block']) ?>
                 </div>
                 <div class="col-md-4 text-left" style="margin-top: 8px;">
-                    <a href="#" data-dismiss="modal">Close</a>
+                    <a href="#" data-dismiss="modal">ปิด</a>
                 </div>
             </div>
         </div>

@@ -57,7 +57,7 @@ use appxq\sdii\helpers\SDHtml;
     <div class="modal-footer">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-<?= Html::submitButton('บันทึก', ['class' => 'btn btn-primary btn-lg btn-block']) ?>
+<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'เพิ่ม') : Yii::t('app', 'แก้ไจ'), ['class' => $model->isNewRecord ? 'btn btn-success btn-lg btn-block' : 'btn btn-primary btn-lg btn-block']) ?>
 
             </div>
         </div>
