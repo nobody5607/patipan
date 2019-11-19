@@ -26,7 +26,7 @@ $this->title = Yii::t('user', 'เพิ่มครูผู้สอน');
      
     <?= $form->field($model, 'tel')->textInput()?>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?>
+        <?= Html::submitButton(Yii::t('user', 'เพิ่ม'), ['class' => 'btn btn-block btn-success']) ?>
     </div>
 </div>
 <?php ActiveForm::end();?>
